@@ -111,6 +111,8 @@ class SecondVersionFactory{
 Since the two factories `FirstVersionFactory` and `SecondVersionFactory` implement the same interaface, they provide an interchangeable and loose coupled way of creating objects implementing `DoSomethingInterface` or `DoSomethingElseInterface`.
 
 ## Builder
+The Builder design pattern provides a simple step-by-step process to construct complex objects.
+
 ## Factory Method
 The Factory method design pattern provides an easy introduction for new classes of objects that offer similar functionality with respect to the previous ones. 
 ## Prototype
