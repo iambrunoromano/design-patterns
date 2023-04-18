@@ -2,20 +2,37 @@
 
 ## Abstract Factory
 The Abstract Factory design pattern provides and easy way to create families of related objects without specifying their concrete classes.
+
 The case is you have several classes that behave in a similar way but differ for what they do represent:
 ```
-public class SomeClassFirstVersion{
-    public void doSomething(){}
+class SomeClassFirstVersion{
+    void doSomething(){}
 }
 
-public class SomeClassSecondVersion{
-    public void doSomething(){}
+class SomeClassSecondVersion{
+    void doSomething(){}
 }
 
-public class SomeClassThirdVersion{
-    public void doSomething(){}
+class SomeClassThirdVersion{
+    void doSomething(){}
 }
 ```
+
+Define then an interface with the common behaviours for the mentioned classes:
+```
+interface DoSomethingInterface{
+    void doSomething();
+}
+```
+
+Define then another interface for the coming factory classes, namely the `AbstractFactory`:
+```
+interface FactoryInterface{
+    DoSomethingInterface createDoSomething();
+}
+```
+
+
 ## Builder
 ## Factory Method
 The Factory method design pattern provides an easy introduction for new classes of objects that offer similar functionality with respect to the previous ones. 
