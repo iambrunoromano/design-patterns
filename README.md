@@ -25,13 +25,37 @@ interface DoSomethingInterface{
 }
 ```
 
+Let then all the classes implement this interface:
+```
+class SomeClassFirstVersion implements DoSomethingInterface{
+    @Override
+    void doSomething(){
+        System.out.println("New [First Version] doSomething method!");
+    }
+}
+
+class SomeClassSecondVersion implements DoSomethingInterface{
+    @Override
+    void doSomething(){
+        System.out.println("New [Second Version] doSomething method!");
+    }
+}
+
+class SomeClassThirdVersion implements DoSomethingInterface{
+    @Override
+    void doSomething(){
+        System.out.println("New [Third Version] doSomething method!");
+    }
+}
+```
+
+
 Define then another interface for the coming factory classes, namely the `AbstractFactory`:
 ```
 interface FactoryInterface{
     DoSomethingInterface createDoSomething();
 }
 ```
-
 
 ## Builder
 ## Factory Method
