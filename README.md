@@ -12,10 +12,6 @@ class FirstClassFirstVersion{
 class FirstClassSecondVersion{
     void doSomething(){}
 }
-
-class FirstClassThirdVersion{
-    void doSomething(){}
-}
 ```
 
 Define then an interface with the common behaviours for the mentioned classes:
@@ -39,13 +35,6 @@ class FirstClassSecondVersion implements DoSomethingInterface{
         System.out.println("New [Second Version] doSomething method!");
     }
 }
-
-class FirstClassThirdVersion implements DoSomethingInterface{
-    @Override
-    void doSomething(){
-        System.out.println("New [Third Version] doSomething method!");
-    }
-}
 ```
 
 Identify the second group of classes that behave in a similar way but differ for what they do represent:
@@ -55,10 +44,6 @@ class SecondClassFirstVersion{
 }
 
 class SecondClassSecondVersion{
-    void doSomethingElse(){}
-}
-
-class SecondClassThirdVersion{
     void doSomethingElse(){}
 }
 ```
@@ -84,13 +69,6 @@ class SecondClassSecondVersion implements DoSomethingElseInterface{
         System.out.println("New [Second Version] doSomethingElse method!");
     }
 }
-
-class SecondClassThirdVersion implements DoSomethingElseInterface{
-    @Override
-    void doSomethingElse(){
-        System.out.println("New [Third Version] doSomethingElse method!");
-    }
-}
 ```
 
 Now that all the classes that behave in the same way are grouped around common interfaces we can define a new interface for the coming factory classes.
@@ -103,7 +81,34 @@ interface FactoryInterface{
 }
 ```
 
-We can now create several `Factories` that will take care of creating each one objects implementing `DoSomethingInterface` or `DoSomethingElseInterface`.
+We can now create several `Factories` that will take care of creating objects implementing `DoSomethingInterface` or `DoSomethingElseInterface`:
+```
+class FirstVersionFactory{
+    @Override
+    public DoSomethingInterface createDoSomething() {
+        return new FirstClassFirstVersion();
+    }
+    
+    @Override
+    public DoSomethingElseInterface createDoSomethingElse() {
+        return new SecondClassFirstVersion();
+    }
+}
+
+class SecondVersionFactory{
+    @Override
+    public DoSomethingInterface createDoSomething() {
+        return new FirstClassSecondVersion();
+    }
+    
+    @Override
+    public DoSomethingElseInterface createDoSomethingElse() {
+        return new SecondClassSecondVersion();
+    }
+}
+```
+
+Since the two factories `FirstVersionFactory` and `SecondVersionFactory` implement the same interaface, they provide an interchangeable and loose coupled way of creating objects implementing `DoSomethingInterface` or `DoSomethingElseInterface`.
 
 ## Builder
 ## Factory Method
