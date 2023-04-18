@@ -99,8 +99,11 @@ Namely the `AbstractFactory`:
 ```
 interface FactoryInterface{
     DoSomethingInterface createDoSomething();
+    DoSomethingElseInterface createDoSomethingElse();
 }
 ```
+
+We can now create several `Factories` that will take care of creating each one objects implementing `DoSomethingInterface` or `DoSomethingElseInterface`.
 
 ## Builder
 ## Factory Method
