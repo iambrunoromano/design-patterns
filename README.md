@@ -179,7 +179,6 @@ class FirstBuilder {
     
     ...
     
-    @Override
     FirstClass build() {
         return new FirstClass(firstField,secondField,thirdField,...);
     }
@@ -217,30 +216,44 @@ class SecondBuilder {
     
     ...
     
-    @Override
-    NumerousFieldsClass build() {
+    SecondClass build() {
         return new SecondClass(firstField,secondField,thirdField,...);
     }
 }
 ```
 
-Create then a new `Director` class that given a `Builder` implementing class delegates thè construction:
+Create then a new `Director` class that, given a `Builder`-implementing class, delegates the construction according the chosen recipe:
 
 ```
-class Director {
-    private Builder builder;
-    
-    public Director(Builder builder){
-        this.builder = builder; 
+class Director {    
+    public void buildFirstRecipe(Builder builder) {
+        builder.firstField(new FirstField());
+        builder.secondField(new SecondField());
+        builder.thirdField(new ThirdField());
     }
     
-    public void setBuilder(Builder builder){
-        this.builder = builder
-    }
     
-    public 
+    public void buildSecondRecipe(Builder builder) {
+        builder.secondField(new SecondField());
+        builder.firstField(new FirstField());
+        builder.thirdField(new ThirdField());
+    }
 }
 ```
+
+Now we can finally decouple the client code from the recipe used to create an object of class `FirstClass` and `SecondClass`:
+
+```
+class Demo {
+    public static void main(String[] args) {
+        Director director = new Director();
+        FirstBuilder firstBuilder = new FirstBuilder();
+        director.buildFirstRecipe(firstBuilder);
+        FirstClass firstClass = firstBuilder.build();
+    }
+}
+```
+
 
 ## Factory Method
 The Factory method design pattern provides an easy introduction for new classes of objects that offer similar functionality with respect to the previous ones. 
