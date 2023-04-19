@@ -3,6 +3,8 @@
 ## Abstract Factory
 The Abstract Factory design pattern provides and easy way to create families of related objects without specifying their concrete classes.
 
+<details>
+  <summary>Click to know more about the Abstract Factory</summary>
 Identify the first group of classes that behave in a similar way but differ for what they do represent:
 ```
 class FirstClassFirstVersion{
@@ -109,7 +111,8 @@ class SecondVersionFactory{
 ```
 
 Since the two factories `FirstVersionFactory` and `SecondVersionFactory` implement the same interaface, they provide an interchangeable and loose coupled way of creating objects implementing `DoSomethingInterface` or `DoSomethingElseInterface`.
-
+</details>
+    
 ## Builder
 The Builder design pattern provides a simple step-by-step process to construct complex related objects hiding the construction process to the client code.
 Identify the classes which requires numerous step-by-step initialization of fields and nested objects and the relative long constructor:
