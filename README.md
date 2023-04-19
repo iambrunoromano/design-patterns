@@ -119,7 +119,7 @@ Since the two factories `FirstVersionFactory` and `SecondVersionFactory` impleme
 The Builder design pattern provides a simple step-by-step process to construct complex related objects hiding the construction process to the client code.
 
 <details>
-  <summary>Click to know more about the Abstract Factory</summary>
+  <summary>Click to know more about the Builder</summary>
 
   
 Identify the classes which requires numerous step-by-step initialization of fields and nested objects and the relative long constructor:
