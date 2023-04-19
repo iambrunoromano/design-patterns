@@ -333,6 +333,38 @@ class SecondProductClass implements Product {
     };
 }
 ```
+
+Now create an abstract `Factory` class that will be extended by the specific `ConcreteFactory` required for each product:
+  
+```
+abstract class Factory {
+    void someOtherMethodWithCommonImplementation(){
+        //do something
+    }
+    abstract Product createProduct();
+}
+```
+  
+Create then the concrete factories extending the `Factory` class. 
+  
+Because of the `abstract` method seen, the `ConcreteFactory` classes will need to specify their own implementation of the method `abstract Product createProduct();`:
+  
+```
+class FirstConcreteFactor {
+    @Override
+    Product createProduct() {
+        return new FirstProductClass();
+    }
+}
+  
+class SecondConcreteFactor {
+    @Override
+    Product createProduct() {
+        return new SecondProductClass();
+    }
+}
+```
+  
 </details>
 
 ## Prototype
