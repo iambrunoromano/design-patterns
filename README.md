@@ -295,7 +295,32 @@ In this way the steps are completely decoupled from the managing of them during 
 </details>
 
 ## Factory Method
-The Factory method design pattern provides an easy introduction for new classes of objects that offer similar functionality with respect to the previous ones. 
+The Factory method design pattern provides an easy introduction for new classes of objects that offer similar functionality with respect to the previous ones.
+
+Imagine you use a specific class with specific methods all over your codebase:
+```
+class ProductClass {
+  void doSomething(){};
+}
+```
+
+Substitution of the `ProductClass` could require extensive code refactor. 
+
+To avoid this problem one could define a `Product` interface that classes like the latter have to implement:
+```
+interface Product 
+  void doSomething();  
+}
+
+class ProductClass implements Product {
+  @Override
+  void doSomething() {
+    System.out.println("New [Product Class] doSomething method!");
+  };
+}
+```
+
+
 ## Prototype
 ## Singleton
 ## Abstract Factory
