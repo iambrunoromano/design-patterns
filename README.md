@@ -128,9 +128,11 @@ Create a new `Builder` interface that declares all the methods that all the sing
 ```
 interface Builder {
     void reset();
-    void firstStep();
-    void secondStep();
+    void firstField(FirstField firstField);
+    void secondField(SecondField secondField);
+    void thirdField(ThirdField thirdField);
     ...
+    NumerousFieldsClass build();
 }
 ```
 
@@ -138,37 +140,97 @@ Create the new builder classes that implement the building steps in their own wa
 
 ```
 class FirstBuilder {
+    private NumerousFieldsClass numerousFieldsClass;
+    
+    private FirstField firstField;
+    private SecondField secondField;
+    private ThirdField thirdField;
+    ...
+    
     @Override
-    void reset(){
-        System.out.println("New [First] reset method!");
+    void reset() {
+        this.firstField = null;
+        this.secondField = null;
+        this.thirdField = null;
     }
     
     @Override
-    void firstStep(){
-        System.out.println("New [First] firstStep method!");
+    void firstField(FirstField firstField) {
+        this.firstField = firstField;        
     }
     
     @Override
-    void secondStep(){
-        System.out.println("New [First] secondStep method!");
+    void secondField(SecondField secondField) {
+        this.secondField = secondField;
+    }
+    
+    @Override
+    void thirdField(ThirdField thirdField) {
+        this.thirdField = thirdField;
+    }
+    
+    ...
+    
+    @Override
+    NumerousFieldsClass build() {
+        return new NumerousFieldsClass(firstField,secondField,thirdField,...);
     }
 }
 
 class SecondBuilder {
+    private NumerousFieldsClass numerousFieldsClass;
+    
+    private FirstField firstField;
+    private SecondField secondField;
+    private ThirdField thirdField;
+    ...
+    
     @Override
-    void reset(){
-        System.out.println("New [Second] reset method!");
+    void reset() {
+        this.firstField = null;
+        this.secondField = null;
+        this.thirdField = null;
     }
     
     @Override
-    void firstStep(){
-        System.out.println("New [Second] firstStep method!");
+    void firstField(FirstField firstField) {
+        this.firstField = firstField;        
     }
     
     @Override
-    void secondStep(){
-        System.out.println("New [Second] secondStep method!");
+    void secondField(SecondField secondField) {
+        this.secondField = secondField;
     }
+    
+    @Override
+    void thirdField(ThirdField thirdField) {
+        this.thirdField = thirdField;
+    }
+    
+    ...
+    
+    @Override
+    NumerousFieldsClass build() {
+        return new NumerousFieldsClass(firstField,secondField,thirdField,...);
+    }
+}
+```
+
+Create then a new `Director` class that given a `Builder` implementing class delegates thè construction:
+
+```
+class Director {
+    private Builder builder;
+    
+    public Director(Builder builder){
+        this.builder = builder; 
+    }
+    
+    public void setBuilder(Builder builder){
+        this.builder = builder
+    }
+    
+    public 
 }
 ```
 
