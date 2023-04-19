@@ -403,6 +403,15 @@ class Demo {
 </details>
 
 ## Prototype
+
+<details>
+  <summary>Click to know more about the Prototype</summary>
+
+The Prototype design pattern delegates the creation of an exact copy (private fields included) of an existing object to the object itself, decoupling the client code from the realization of the copy. An object supporting the creation of its exact copy (namely `cloning`) is called `prototype`.
+
+
+</details>
+
 ## Singleton
 ## Abstract Factory
 
