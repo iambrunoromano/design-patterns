@@ -350,21 +350,49 @@ Create then the concrete factories extending the `Factory` class.
 Because of the `abstract` method seen, the `ConcreteFactory` classes will need to specify their own implementation of the method `abstract Product createProduct();`:
   
 ```
-class FirstConcreteFactor {
+class FirstConcreteFactory extends Factory {
     @Override
     Product createProduct() {
         return new FirstProductClass();
     }
 }
   
-class SecondConcreteFactor {
+class SecondConcreteFactory extends Factory {
     @Override
     Product createProduct() {
         return new SecondProductClass();
     }
 }
 ```
+
+Client code should then use only the interface `Product` to refer any of the products and the class `Factory` to refer to any factor.
   
+In this way the change between factories and therefore products created is seamless and the codebase is always ready for the introduction of a new `Factory` or `Product`:
+
+```
+class Demo {
+    private Factory factory;
+    private Product product;
+    public static void main(String[] args) {
+        this.factory = new FirstConcreteFactory();
+        this.product = this.factory.createProduct();
+    }
+}
+```
+  
+If I want to use `SecondConcreteFactory` and therefore create a new object of class `SecondProductClass` I will need to change just one row of the latter code:
+
+```
+class Demo {
+    private Factory factory;
+    private Product product;
+    public static void main(String[] args) {
+        this.factory = new SecondConcreteFactory();
+        this.product = this.factory.createProduct();
+    }
+}
+```
+
 </details>
 
 ## Prototype
