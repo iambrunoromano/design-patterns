@@ -134,7 +134,43 @@ interface Builder {
 }
 ```
 
+Create the new builder classes that implement the building steps in their own ways:
 
+```
+class FirstBuilder {
+    @Override
+    void reset(){
+        System.out.println("New [First] reset method!");
+    }
+    
+    @Override
+    void firstStep(){
+        System.out.println("New [First] firstStep method!");
+    }
+    
+    @Override
+    void secondStep(){
+        System.out.println("New [First] secondStep method!");
+    }
+}
+
+class SecondBuilder {
+    @Override
+    void reset(){
+        System.out.println("New [Second] reset method!");
+    }
+    
+    @Override
+    void firstStep(){
+        System.out.println("New [Second] firstStep method!");
+    }
+    
+    @Override
+    void secondStep(){
+        System.out.println("New [Second] secondStep method!");
+    }
+}
+```
 
 ## Factory Method
 The Factory method design pattern provides an easy introduction for new classes of objects that offer similar functionality with respect to the previous ones. 
