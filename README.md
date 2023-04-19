@@ -1,5 +1,7 @@
 # Creational Design Patterns
-The aim of this simple repository is to provide a clear code-based explanation of the major Design Patterns.
+The purpose of this simple repository is dual:
+1. track the Design Patterns I'm studying
+2. provide a clear code-based explanation of the major Design Patterns
 
 Each Design Pattern is briefly described and an example of it is presented. The language used is Java.
 
