@@ -112,10 +112,17 @@ Since the two factories `FirstVersionFactory` and `SecondVersionFactory` impleme
 
 ## Builder
 The Builder design pattern provides a simple step-by-step process to construct complex related objects hiding the construction process to the client code.
-Identify the class which requires numerous step-by-step initialization of fields and nested objects and the relative long constructor:
+Identify the classes which requires numerous step-by-step initialization of fields and nested objects and the relative long constructor:
 
 ```
-class NumerousFieldsClass {
+class FirstClass {
+    private int firstField;
+    private int secondField;
+    private int thirdField;
+    ...
+}
+
+class SecondClass {
     private int firstField;
     private int secondField;
     private int thirdField;
@@ -132,15 +139,16 @@ interface Builder {
     void secondField(SecondField secondField);
     void thirdField(ThirdField thirdField);
     ...
-    NumerousFieldsClass build();
 }
 ```
 
-Create the new builder classes that implement the building steps in their own ways:
+As you may notice the `Builder` interface provides methods useful during both construction of `FirstClass` and `SecondClass` objects.
+
+Create the new builder classes that implement the building steps for the single chosen (product - `FirstClass` and `SecondClass`) class:
 
 ```
 class FirstBuilder {
-    private NumerousFieldsClass numerousFieldsClass;
+    private FirstClass firstClass;
     
     private FirstField firstField;
     private SecondField secondField;
@@ -172,13 +180,13 @@ class FirstBuilder {
     ...
     
     @Override
-    NumerousFieldsClass build() {
-        return new NumerousFieldsClass(firstField,secondField,thirdField,...);
+    FirstClass build() {
+        return new FirstClass(firstField,secondField,thirdField,...);
     }
 }
 
 class SecondBuilder {
-    private NumerousFieldsClass numerousFieldsClass;
+    private SecondClass secondClass;
     
     private FirstField firstField;
     private SecondField secondField;
@@ -211,7 +219,7 @@ class SecondBuilder {
     
     @Override
     NumerousFieldsClass build() {
-        return new NumerousFieldsClass(firstField,secondField,thirdField,...);
+        return new SecondClass(firstField,secondField,thirdField,...);
     }
 }
 ```
