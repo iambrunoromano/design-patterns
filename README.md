@@ -1,4 +1,9 @@
 # Creational Design Patterns
+The aim of this simple repository is to provide a clear code-based explanation of the major Design Patterns.
+
+Each Design Pattern is briefly described and an example of it is presented. The language used is Java.
+
+Methods implementation and attribute values are skip to leave the code readable.
 
 ## Abstract Factory
 The Abstract Factory design pattern provides and easy way to create families of related objects without specifying their concrete classes.
