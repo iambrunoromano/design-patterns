@@ -112,6 +112,18 @@ Since the two factories `FirstVersionFactory` and `SecondVersionFactory` impleme
 
 ## Builder
 The Builder design pattern provides a simple step-by-step process to construct complex objects.
+Identify the class which requires numerous step-by-step initialization of fields and nested objects and the relative long constructor:
+
+```
+class NumerousFieldsClass{
+    private int firstField;
+    private int secondField;
+    private int thirdField;
+    ...
+}
+```
+
+
 
 ## Factory Method
 The Factory method design pattern provides an easy introduction for new classes of objects that offer similar functionality with respect to the previous ones. 
