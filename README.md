@@ -375,5 +375,23 @@ class SecondConcreteFactor {
 
 ## Adapter
 ## Bridge
+## Composite
+## Decorator
+## Facade
+## Flyweight
+## Proxy
+
+# Behavioral Design Patterns
+
+## Chain of Responsibility
+## Command
+## Iterator
+## Mediator
+## Memento
+## Observer
+## State
+## Strategy
+## Template Method
+## Visitor
 
 Credits to [Refactoring Guru's design patterns](https://refactoring.guru/design-patterns)
