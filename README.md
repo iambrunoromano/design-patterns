@@ -6,6 +6,7 @@ The Abstract Factory design pattern provides and easy way to create families of 
 <details>
   <summary>Click to know more about the Abstract Factory</summary>
   
+  
 Identify the first group of classes that behave in a similar way but differ for what they do represent:
 ```
 class FirstClassFirstVersion{
@@ -116,6 +117,11 @@ Since the two factories `FirstVersionFactory` and `SecondVersionFactory` impleme
     
 ## Builder
 The Builder design pattern provides a simple step-by-step process to construct complex related objects hiding the construction process to the client code.
+
+<details>
+  <summary>Click to know more about the Abstract Factory</summary>
+
+  
 Identify the classes which requires numerous step-by-step initialization of fields and nested objects and the relative long constructor:
 
 ```
@@ -286,6 +292,7 @@ class Demo {
 
 In this way the steps are completely decoupled from the managing of them during the construction phase, therefore a change in the steps' body or recipe's body is hidden with respect to the client code.
 
+</details>
 
 ## Factory Method
 The Factory method design pattern provides an easy introduction for new classes of objects that offer similar functionality with respect to the previous ones. 
