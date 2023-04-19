@@ -111,14 +111,25 @@ class SecondVersionFactory{
 Since the two factories `FirstVersionFactory` and `SecondVersionFactory` implement the same interaface, they provide an interchangeable and loose coupled way of creating objects implementing `DoSomethingInterface` or `DoSomethingElseInterface`.
 
 ## Builder
-The Builder design pattern provides a simple step-by-step process to construct complex objects.
+The Builder design pattern provides a simple step-by-step process to construct complex objects hiding the construction process to the client code.
 Identify the class which requires numerous step-by-step initialization of fields and nested objects and the relative long constructor:
 
 ```
-class NumerousFieldsClass{
+class NumerousFieldsClass {
     private int firstField;
     private int secondField;
     private int thirdField;
+    ...
+}
+```
+
+Create a new `Builder` interface that declares all the methods that all the single builder classes will need to provide their own implementation of:
+
+```
+interface Builder {
+    void reset();
+    void firstStep();
+    void secondStep();
     ...
 }
 ```
