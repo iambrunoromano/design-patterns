@@ -254,6 +254,34 @@ class Demo {
 }
 ```
 
+If you want now to use another recipe you can just change one line of code of what you just read, completely decoupling the recipe needed to build something from the actual builder:
+
+```
+class Demo {
+    public static void main(String[] args) {
+        Director director = new Director();
+        FirstBuilder firstBuilder = new FirstBuilder();
+        director.buildSecondRecipe(firstBuilder);
+        FirstClass firstClass = firstBuilder.build();
+    }
+}
+```
+
+If you want instead to build another type of object but maintaing the same `firstRecipe` you can change only the used builder:
+
+```
+class Demo {
+    public static void main(String[] args) {
+        Director director = new Director();
+        SecondBuilder secondBuilder = new SecondBuilder();
+        director.buildFirstRecipe(secondBuilder);
+        SecondClass secondClass = secondBuilder.build();
+    }
+}
+```
+
+In this way the steps are completely decoupled from the managing of them during the construction phase, therefore a change in the steps' body or recipe's body is hidden with respect to the client code.
+
 
 ## Factory Method
 The Factory method design pattern provides an easy introduction for new classes of objects that offer similar functionality with respect to the previous ones. 
