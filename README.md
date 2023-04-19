@@ -299,7 +299,7 @@ The Factory method design pattern provides an easy introduction for new classes 
 
 <details>
   <summary>Click to know more about the Factory Method</summary>
-  
+
 Imagine you use a specific class with specific methods all over your codebase:
 ```
 class FirstProductClass {
