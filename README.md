@@ -425,7 +425,7 @@ class Demo {
 ```
 
 If I want to use `SecondConcreteFactory` and therefore create a new object of class `SecondProductClass` I will need to
-change just one row of the latter code:
+change just one line of the latter code:
 
 ```
 class Demo {
@@ -450,10 +450,103 @@ the object itself, decoupling the client code from the realization of the copy.
 
 An object supporting the creation of its exact copy (namely `cloning`) is called `prototype`.
 
+Let's define an abstract class that represents the common interface we want to give all the cloneable objects:
+
+```
+abstract class Cloneable {
+    public int firstField;
+    ...
+    public Cloneable () {}
+    public Cloneable (Cloneable target) {
+        if (target != null) {
+            this.firstField = target.firstField;
+            ...
+        }
+    }
+    public abstract Cloneable clone();   
+}
+```
+
+Let's define then some cloneable object classes:
+
+```
+class FirstCloneableClass extends Cloneable {
+    public FirstCloneableClass (FirstCloneableClass target) {
+        if (target != null) {
+            ...
+        }
+    }
+    @Override
+    public FirstCloneableClass clone() {
+        return new FirstCloneableClass(this);
+    }
+}
+
+class SecondCloneableClass extends Cloneable {
+    public SecondCloneableClass (SecondCloneableClass target) {
+        if (target != null) {
+            ...
+        }
+    }
+    @Override
+    public SecondCloneableClass clone() {
+        return new SecondCloneableClass(this);
+    }
+}
+```
+
+In this way we can use the `Cloneable` abstract class to declare variables. Each one will be able to properly clone
+itself:
+
+```
+class Demo {
+    public static void main(String[] args) {
+        Cloneable firstCloneable = new FirstCloneableClass();
+        // set here values of firstCloneable fields
+        Cloneable secondCloneable = new SecondCloneableClass();
+        // set here values of secondCloneable fields
+        Cloneable anotherCloneable = firstCloneable.clone(); 
+        // anotherCloneable is now a clone of class FirstCloneableClass
+        anotherCloneable = secondCloneable.clone(); 
+        // anotherCloneable is now a clone of class SecondCloneableClass 
+    }
+}
+```
 
 </details>
 
 ## Singleton
+
+The Singleton design pattern guarantees that a specific class has only one instance letting the client code to access
+only to this instance.
+
+
+<details>
+  <summary>Click to know more about the Singleton</summary>
+
+The Singleton design pattern is defined by two main characteristics.
+
+1. have on the class that should have only one instance a private constructor
+2. the class should implement some static method that evaluates if to call the private constructor
+
+
+```
+class Singleton {
+    private static Singletong instance;
+    private int value;
+    private Singleton(int value) {
+        this.value = value;
+    }
+    public static Singleton getInstance(int value) {
+        if(instance==null) {
+            return new Singleton(value);
+        }
+        return instance;
+    }
+}
+```
+
+</details>
 
 ## Abstract Factory
 
