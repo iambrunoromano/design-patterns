@@ -549,11 +549,90 @@ class Singleton {
 
 </details>
 
-## Abstract Factory
-
 # Structural Design Patterns
 
 ## Adapter
+
+The Adapter design pattern allows two objects with different interfaces to work together.
+
+<details>
+  <summary>Click to know more about the Singleton</summary>
+
+The Adapter converts the interface of an object in a way another object can work with that.
+
+Let's suppose we have a class that represents an unmodifiable system which requires to execute some `doSomething` method
+of the passed object to expose some functionality:
+
+```
+class Closed { // some class closed to modification
+    void exposeFunctionality(ExpectedClass expected) {
+        expected.doSomething();
+    }
+}
+```
+
+The `Expected` will therefore be:
+
+```
+class Expected {
+    public void doSomething() {
+    }
+}
+```
+
+Let's imagine now we have another class named `Difficult` we want to let the `Closed` class use that:
+
+1. doesn't expose a `doSomething` method
+2. is closed to modification
+
+```
+class Difficult {
+    public void firstMethod() {
+    }
+    public void secondMethod() {
+    }
+    public void thirdMethod() {
+    }
+    ...
+}
+```
+
+The `Adapter` will therefore be:
+
+```
+class Adapter extends Expected {
+    private Difficult difficult;
+    public Adapter(Difficult difficult) {
+        this.difficult = difficult;
+    }
+    @Override
+    public void doSomething() {
+        // let's suppose that the doSomething method can be logically equivalent
+        // to a combination of some methods of the Difficult class
+        difficult.firstMethod();
+        difficult.secondMethod();
+        difficult.thirdMethod();
+        ...
+    }
+}
+```
+
+The client code can therefore be using the `Difficult` class with the `Closed` class:
+
+```
+class Demo {
+    public static void main(String[] args) {
+        Closed closed = new Closed();
+        Expected expected = new Expected();
+        Difficult difficult = new Difficult();
+        Adapter adapter = new Adapter(difficult);
+        closed.exposeFunctionality(expected); // as it is meant to be
+        closed.exposeFunctionality(adapter); // using the adapter indirectly using difficult
+    }
+}
+```
+
+</details>
 
 ## Bridge
 
