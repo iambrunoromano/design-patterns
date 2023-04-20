@@ -1,5 +1,7 @@
 # Creational Design Patterns
+
 The purpose of this simple repository is dual:
+
 1. track the Design Patterns I'm studying
 2. provide a clear code-based explanation of the major Design Patterns
 
@@ -8,13 +10,16 @@ Each Design Pattern is briefly described and an example of it is presented. The 
 Methods implementation and attribute values are skip to leave the code readable.
 
 ## Abstract Factory
-The Abstract Factory design pattern provides and easy way to create families of related objects without specifying their concrete classes.
+
+The Abstract Factory design pattern provides and easy way to create families of related objects without specifying their
+concrete classes.
 
 <details>
   <summary>Click to know more about the Abstract Factory</summary>
-  
-  
+
+
 Identify the first group of classes that behave in a similar way but differ for what they do represent:
+
 ```
 class FirstClassFirstVersion{
     void doSomething(){}
@@ -26,12 +31,15 @@ class FirstClassSecondVersion{
 ```
 
 Define then an interface with the common behaviours for the mentioned classes:
+
 ```
 interface DoSomethingInterface{
     void doSomething();
 }
 ```
+
 and then let all the classes implement this interface:
+
 ```
 class FirstClassFirstVersion implements DoSomethingInterface{
     @Override
@@ -49,6 +57,7 @@ class FirstClassSecondVersion implements DoSomethingInterface{
 ```
 
 Identify the second group of classes that behave in a similar way but differ for what they do represent:
+
 ```
 class SecondClassFirstVersion{
     void doSomethingElse(){}
@@ -60,12 +69,15 @@ class SecondClassSecondVersion{
 ```
 
 Define then an interface with the common behaviours for the mentioned classes:
+
 ```
 interface DoSomethingElseInterface{
     void doSomethingElse();
 }
 ```
+
 and then let all the classes implement this interface:
+
 ```
 class SecondClassFirstVersion implements DoSomethingElseInterface{
     @Override
@@ -82,9 +94,11 @@ class SecondClassSecondVersion implements DoSomethingElseInterface{
 }
 ```
 
-Now that all the classes that behave in the same way are grouped around common interfaces we can define a new interface for the coming factory classes.
+Now that all the classes that behave in the same way are grouped around common interfaces we can define a new interface
+for the coming factory classes.
 
 Namely the `AbstractFactory`:
+
 ```
 interface FactoryInterface{
     DoSomethingInterface createDoSomething();
@@ -92,7 +106,9 @@ interface FactoryInterface{
 }
 ```
 
-We can now create several `Factories` that will take care of creating objects implementing `DoSomethingInterface` or `DoSomethingElseInterface`:
+We can now create several `Factories` that will take care of creating objects implementing `DoSomethingInterface`
+or `DoSomethingElseInterface`:
+
 ```
 class FirstVersionFactory{
     @Override
@@ -119,17 +135,22 @@ class SecondVersionFactory{
 }
 ```
 
-Since the two factories `FirstVersionFactory` and `SecondVersionFactory` implement the same interaface, they provide an interchangeable and loose coupled way of creating objects implementing `DoSomethingInterface` or `DoSomethingElseInterface`.
+Since the two factories `FirstVersionFactory` and `SecondVersionFactory` implement the same interaface, they provide an
+interchangeable and loose coupled way of creating objects implementing `DoSomethingInterface`
+or `DoSomethingElseInterface`.
 </details>
-    
+
 ## Builder
-The Builder design pattern provides a simple step-by-step process to construct complex related objects hiding the construction process to the client code.
+
+The Builder design pattern provides a simple step-by-step process to construct complex related objects hiding the
+construction process to the client code.
 
 <details>
   <summary>Click to know more about the Builder</summary>
 
-  
-Identify the classes which requires numerous step-by-step initialization of fields and nested objects and the relative long constructor:
+
+Identify the classes which requires numerous step-by-step initialization of fields and nested objects and the relative
+long constructor:
 
 ```
 class FirstClass {
@@ -147,7 +168,8 @@ class SecondClass {
 }
 ```
 
-Create a new `Builder` interface that declares all the methods that all the single builder classes will need to provide their own implementation of:
+Create a new `Builder` interface that declares all the methods that all the single builder classes will need to provide
+their own implementation of:
 
 ```
 interface Builder {
@@ -159,9 +181,11 @@ interface Builder {
 }
 ```
 
-As you may notice the `Builder` interface provides methods useful during both construction of `FirstClass` and `SecondClass` objects.
+As you may notice the `Builder` interface provides methods useful during both construction of `FirstClass`
+and `SecondClass` objects.
 
-Create the new builder classes that implement the building steps for the single chosen (product - `FirstClass` and `SecondClass`) class:
+Create the new builder classes that implement the building steps for the single chosen (product - `FirstClass`
+and `SecondClass`) class:
 
 ```
 class FirstBuilder {
@@ -239,7 +263,8 @@ class SecondBuilder {
 }
 ```
 
-Create then a new `Director` class that, given a `Builder`-implementing class, delegates the construction according the chosen recipe:
+Create then a new `Director` class that, given a `Builder`-implementing class, delegates the construction according the
+chosen recipe:
 
 ```
 class Director {    
@@ -258,7 +283,8 @@ class Director {
 }
 ```
 
-Now we can finally decouple the client code from the recipe used to create an object of class `FirstClass` and `SecondClass`:
+Now we can finally decouple the client code from the recipe used to create an object of class `FirstClass`
+and `SecondClass`:
 
 ```
 class Demo {
@@ -271,7 +297,8 @@ class Demo {
 }
 ```
 
-If you want now to use another recipe you can just change one line of code of what you just read, completely decoupling the recipe needed to build something from the actual builder:
+If you want now to use another recipe you can just change one line of code of what you just read, completely decoupling
+the recipe needed to build something from the actual builder:
 
 ```
 class Demo {
@@ -284,7 +311,8 @@ class Demo {
 }
 ```
 
-If you want instead to build another type of object but maintaing the same `firstRecipe` you can change only the used builder:
+If you want instead to build another type of object but maintaing the same `firstRecipe` you can change only the used
+builder:
 
 ```
 class Demo {
@@ -297,17 +325,21 @@ class Demo {
 }
 ```
 
-In this way the steps are completely decoupled from the managing of them during the construction phase, therefore a change in the steps' body or recipe's body is hidden with respect to the client code.
+In this way the steps are completely decoupled from the managing of them during the construction phase, therefore a
+change in the steps' body or recipe's body is hidden with respect to the client code.
 
 </details>
 
 ## Factory Method
-The Factory method design pattern provides an easy introduction for new classes of objects that offer similar functionality with respect to the previous ones.
+
+The Factory method design pattern provides an easy introduction for new classes of objects that offer similar
+functionality with respect to the previous ones.
 
 <details>
   <summary>Click to know more about the Factory Method</summary>
 
 Imagine you use a specific class with specific methods all over your codebase:
+
 ```
 class FirstProductClass {
     void doSomething(){};
@@ -318,9 +350,10 @@ class SecondProductClass {
 }
 ```
 
-Substitution of the `FirstProductClass` with the `SecondProductClass` could require extensive code refactor. 
+Substitution of the `FirstProductClass` with the `SecondProductClass` could require extensive code refactor.
 
 To avoid this problem one could define a `Product` interface that classes like the latter have to implement:
+
 ```
 interface Product 
     void doSomething();  
@@ -341,8 +374,9 @@ class SecondProductClass implements Product {
 }
 ```
 
-Now create an abstract `Factory` class that will be extended by the specific `ConcreteFactory` required for each product:
-  
+Now create an abstract `Factory` class that will be extended by the specific `ConcreteFactory` required for each
+product:
+
 ```
 abstract class Factory {
     void someOtherMethodWithCommonImplementation(){
@@ -351,11 +385,12 @@ abstract class Factory {
     abstract Product createProduct();
 }
 ```
-  
-Create then the concrete factories extending the `Factory` class. 
-  
-Because of the `abstract` method seen, the `ConcreteFactory` classes will need to specify their own implementation of the method `abstract Product createProduct();`:
-  
+
+Create then the concrete factories extending the `Factory` class.
+
+Because of the `abstract` method seen, the `ConcreteFactory` classes will need to specify their own implementation of
+the method `abstract Product createProduct();`:
+
 ```
 class FirstConcreteFactory extends Factory {
     @Override
@@ -372,9 +407,11 @@ class SecondConcreteFactory extends Factory {
 }
 ```
 
-Client code should then use only the interface `Product` to refer any of the products and the class `Factory` to refer to any factor.
-  
-In this way the change between factories and therefore products created is seamless and the codebase is always ready for the introduction of a new `Factory` or `Product`:
+Client code should then use only the interface `Product` to refer any of the products and the class `Factory` to refer
+to any factor.
+
+In this way the change between factories and therefore products created is seamless and the codebase is always ready for
+the introduction of a new `Factory` or `Product`:
 
 ```
 class Demo {
@@ -386,8 +423,9 @@ class Demo {
     }
 }
 ```
-  
-If I want to use `SecondConcreteFactory` and therefore create a new object of class `SecondProductClass` I will need to change just one row of the latter code:
+
+If I want to use `SecondConcreteFactory` and therefore create a new object of class `SecondProductClass` I will need to
+change just one row of the latter code:
 
 ```
 class Demo {
@@ -404,7 +442,8 @@ class Demo {
 
 ## Prototype
 
-The Prototype design pattern delegates the creation of an exact copy (private fields included) of an existing object to the object itself, decoupling the client code from the realization of the copy.
+The Prototype design pattern delegates the creation of an exact copy (private fields included) of an existing object to
+the object itself, decoupling the client code from the realization of the copy.
 
 <details>
   <summary>Click to know more about the Prototype</summary>
@@ -415,29 +454,45 @@ An object supporting the creation of its exact copy (namely `cloning`) is called
 </details>
 
 ## Singleton
+
 ## Abstract Factory
 
 # Structural Design Patterns
 
 ## Adapter
+
 ## Bridge
+
 ## Composite
+
 ## Decorator
+
 ## Facade
+
 ## Flyweight
+
 ## Proxy
 
 # Behavioral Design Patterns
 
 ## Chain of Responsibility
+
 ## Command
+
 ## Iterator
+
 ## Mediator
+
 ## Memento
+
 ## Observer
+
 ## State
+
 ## Strategy
+
 ## Template Method
+
 ## Visitor
 
 Credits to [Refactoring Guru's design patterns](https://refactoring.guru/design-patterns)
