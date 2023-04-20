@@ -1,4 +1,4 @@
-# Creational Design Patterns
+# Design Patterns
 
 The purpose of this simple repository is dual:
 
@@ -8,6 +8,8 @@ The purpose of this simple repository is dual:
 Each Design Pattern is briefly described and an example of it is presented. The language used is Java.
 
 Methods implementation and attribute values are skip to leave the code readable.
+
+# Creational Design Patterns
 
 ## Abstract Factory
 
@@ -528,7 +530,6 @@ The Singleton design pattern is defined by two main characteristics.
 
 1. have on the class that should have only one instance a private constructor
 2. the class should implement some static method that evaluates if to call the private constructor
-
 
 ```
 class Singleton {
