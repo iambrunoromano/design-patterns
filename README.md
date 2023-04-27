@@ -190,7 +190,7 @@ Create the new builder classes that implement the building steps for the single 
 and `SecondClass`) class:
 
 ```
-class FirstBuilder {
+class FirstBuilder implements Builder {
     private FirstClass firstClass;
     
     private FirstField firstField;
@@ -227,7 +227,7 @@ class FirstBuilder {
     }
 }
 
-class SecondBuilder {
+class SecondBuilder implements Builder {
     private SecondClass secondClass;
     
     private FirstField firstField;
