@@ -775,7 +775,7 @@ Without the use of the Bridge design pattern we should have a class for each new
 
 ## Composite
 
-The Composite design pattern allows the creation of objects in a tree-like structure allowing to work on the tree as it was a singular object.
+The <span style="color:red">Composite</span> design pattern allows the creation of objects in a tree-like structure allowing to work on the tree as it was a singular object.
 
 <details>
   <summary>Click to know more about the Composite</summary>
@@ -794,7 +794,6 @@ interface Leaf {
 ```
 
 Let's define some leaf classes:
-
 
 ```
 class FirstLeaf implements Leaf {
