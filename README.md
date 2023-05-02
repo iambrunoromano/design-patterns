@@ -636,6 +636,41 @@ class Demo {
 
 ## Bridge
 
+The Bridge design pattern allows to split a closely correlated set of classes into separate hierarchies named abstraction and implementation that can be develop indipendently from each other.
+
+<details>
+  <summary>Click to know more about the Singleton</summary>
+  
+Imagine you have a set of classes that should perform some actions based on given inputs:
+
+```
+class DoesSomethingByString {
+    public void doSomething(String input) {
+        reallyDoIt(input);
+    }
+    
+    private void reallyDoIt(String input){}
+}
+```
+
+Imagine now you want another class that should do the exact same thing based on some other input type:
+
+```
+class DoesSomethingByInteger {
+    public void doSomething(Integer input) {
+        reallyDoIt(input.toString());
+    }
+    
+    private void reallyDoIt(String input){}
+}
+```
+
+As you can see, each time we want to add use use the same feature `reallyDoIt(String input)` we need to create a new class.
+
+This happens because we do not separate the `abstraction` (the interface with the external world of the chosen class, in our cases the methods: `doSomething(String input)` and `doSomething(Integer input)doSomething(Integer input)`) from the `implementation` (the actually exposed chosen class functionality, the method  `reallyDoIt(String input)`).
+  
+</details>
+
 ## Composite
 
 ## Decorator
