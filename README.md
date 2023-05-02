@@ -806,7 +806,7 @@ class FirstNode implements Node {
     @Override
     void secondMethod() {
         System.out.println("secondMethod implementation of FirstLeaf class")
-    }; 
+    };
 }
 
 class SecondNode implements Node {
@@ -856,12 +856,28 @@ class Composite implements Node {
     void clear() {
         children.clear();
     }
+    
+    @Override
+    void firstMethod() {
+        for(Node node: children) {
+            node.firstMethod();
+        }
+    }    
+    
+    @Override
+    void secondMethod() {
+        for(Node node: children) {
+            node.secondMethod();
+        }
+    }
 }
 ```
 
 As one may notice the Composite class allows insertion and remotion of child subelements.
 
 Also, as `Composite` class implements `Node` class, we can add other composite nodes to the list of children of another composite node, creating in this way a hierarchy tree.
+
+Third and most important feature: with the override of both `firstMethod` and `secondMethod` from the `Composite` class we can propagate easily on the root node (which must be a composite node) the execution of both methods to all the composite and simple nodes down the tree. In this way we can deal with the whole hierarchy of objects as one single object iself.
 
 ## Decorator
 
