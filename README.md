@@ -779,7 +779,6 @@ The Composite design pattern allows the creation of objects in a tree-like struc
 
 <details>
   <summary>Click to know more about the Composite</summary>
-</details>
 
 Imagine that the business logic requires a tree structure of classes where we can have simple nodes and composite nodes. 
 
@@ -869,6 +868,8 @@ As one may notice the Composite class allows insertion and remotion of child sub
 Also, as `Composite` class implements `Node` class, we can add other composite nodes to the list of children of another composite node, creating in this way a hierarchy tree.
 
 Third and most important feature: with the override of both `firstMethod` and `secondMethod` from the `Composite` class we can propagate easily on the root node (which must be a composite node) the execution of both methods to all the composite and simple nodes down the tree. In this way we can deal with the whole hierarchy of objects as one single object iself.
+
+</details>
 
 ## Decorator
 
