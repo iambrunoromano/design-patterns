@@ -556,7 +556,7 @@ class Singleton {
 The Adapter design pattern allows two objects with different interfaces to work together.
 
 <details>
-  <summary>Click to know more about the Singleton</summary>
+  <summary>Click to know more about the Adapter</summary>
 
 The Adapter converts the interface of an object in a way another object can work with that.
 
@@ -639,7 +639,7 @@ class Demo {
 The Bridge design pattern allows to split a closely correlated set of classes into separate hierarchies named abstraction and implementation that can be develop indipendently from each other.
 
 <details>
-  <summary>Click to know more about the Singleton</summary>
+  <summary>Click to know more about the Bridge</summary>
   
 Imagine you have a set of classes that should perform some actions based on given inputs:
 
@@ -774,6 +774,11 @@ Without the use of the Bridge design pattern we should have a class for each new
 </details>
 
 ## Composite
+
+
+<details>
+  <summary>Click to know more about the Composite</summary>
+</details>
 
 ## Decorator
 
