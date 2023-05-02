@@ -775,18 +775,20 @@ Without the use of the Bridge design pattern we should have a class for each new
 
 ## Composite
 
-The <span style="color:red">Composite</span> design pattern allows the creation of objects in a tree-like structure allowing to work on the tree as it was a singular object.
+The Composite design pattern allows the creation of objects in a tree-like structure allowing to work on the tree as it was a singular object.
 
 <details>
   <summary>Click to know more about the Composite</summary>
 </details>
 
-Imagine that the business logic requires a tree structure of classes where we can have leafs and nodes. Leafs canìt have subelements while nodes can, and those can be leafs or nodes.
+Imagine that the business logic requires a tree structure of classes where we can have simple nodes and composite nodes. 
 
-Let's define an interface for the leaf classes:
+Simple nodes can't have subelements while composite nodes can, and those can be simple or composite nodes.
+
+Let's define an interface for the generic node classes:
 
 ```
-interface Leaf {
+interface Node {
     void firstMethod();
     void secondMethod(); 
     ...
@@ -796,7 +798,7 @@ interface Leaf {
 Let's define some leaf classes:
 
 ```
-class FirstLeaf implements Leaf {
+class FirstNode implements Node {
     @Override
     void firstMethod() {
         System.out.println("firstMethod implementation of FirstLeaf class")
@@ -808,7 +810,7 @@ class FirstLeaf implements Leaf {
     }; 
 }
 
-class SecondLeaf implements Leaf {
+class SecondNode implements Node {
     @Override
     void firstMethod() {
         System.out.println("firstMethod implementation of SecondLeaf class")
@@ -817,6 +819,23 @@ class SecondLeaf implements Leaf {
     @Override
     void secondMethod() {
         System.out.println("secondMethod implementation of SecondLeaf class")
+    }; 
+}
+```
+
+We declare now a new class for the composite node:
+
+```
+class Composite implements Node {
+    protected List<Node> children = new ArrayList<>();
+    @Override
+    void firstMethod() {
+        System.out.println("firstMethod implementation of Composite class")
+    }
+    
+    @Override
+    void secondMethod() {
+        System.out.println("secondMethod implementation of Composite class")
     }; 
 }
 ```
