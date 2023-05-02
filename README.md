@@ -827,15 +827,6 @@ We declare now a new class for the composite node:
 ```
 class Composite implements Node {
     protected List<Node> children = new ArrayList<>();
-    @Override
-    void firstMethod() {
-        System.out.println("firstMethod implementation of Composite class")
-    }
-    
-    @Override
-    void secondMethod() {
-        System.out.println("secondMethod implementation of Composite class")
-    };
     
     void add(Node node) {
         children.add(node);
