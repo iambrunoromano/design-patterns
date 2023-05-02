@@ -668,7 +668,79 @@ class DoesSomethingByInteger {
 As you can see, each time we want to add use use the same feature `reallyDoIt(String input)` we need to create a new class.
 
 This happens because we do not separate the `abstraction` (the interface with the external world of the chosen class, in our cases the methods: `doSomething(String input)` and `doSomething(Integer input)doSomething(Integer input)`) from the `implementation` (the actually exposed chosen class functionality, the method  `reallyDoIt(String input)`).
-  
+
+To separate abstraction from implementation one has to declare two separate interfaces:
+
+```
+interface Implementation {
+    void firstFeature();
+    void secondFeature(); 
+    ...
+}
+
+interface Abstraction {
+    void firstInputMethod();
+    void secondInputMethod(); 
+    ...
+}
+```
+
+In this way we can have several classes that implement the business logic of the `Implementation`:
+
+```
+class FirstImplementation implements Implementation {
+    @Override
+    void firstFeature() {
+        System.out.println("firstFeature implementation of FirstImplementation class")
+    }
+    
+    @Override
+    void secondFeature() {
+        System.out.println("secondFeature implementation of FirstImplementation class")
+    }; 
+}
+
+class SecondImplementation implements Implementation {
+    @Override
+    void firstFeature() {
+        System.out.println("firstFeature implementation of SecondImplementation class")
+    }
+    
+    @Override
+    void secondFeature() {
+        System.out.println("secondFeature implementation of SecondImplementation class")
+    }; 
+}
+```
+ 
+In the same way we can have several classes that implement the interface logic of the `Abstraction`:
+
+```
+class FirstAbstraction implements Abstraction {
+    @Override
+    void firstInputMethod() {
+        System.out.println("firstInputMethod implementation of FirstAbstraction class")
+    }
+    
+    @Override
+    void secondInputMethod() {
+        System.out.println("secondInputMethod implementation of FirstAbstraction class")
+    }; 
+}
+
+class SecondAbstraction implements Abstraction {
+    @Override
+    void firstInputMethod() {
+        System.out.println("firstInputMethod implementation of SecondAbstraction class")
+    }
+    
+    @Override
+    void secondInputMethod() {
+        System.out.println("secondInputMethod implementation of SecondAbstraction class")
+    }; 
+}
+```
+
 </details>
 
 ## Composite
