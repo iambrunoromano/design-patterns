@@ -775,10 +775,52 @@ Without the use of the Bridge design pattern we should have a class for each new
 
 ## Composite
 
+The Composite design pattern allows the creation of objects in a tree-like structure allowing to work on the tree as it was a singular object.
 
 <details>
   <summary>Click to know more about the Composite</summary>
 </details>
+
+Imagine that the business logic requires a tree structure of classes where we can have leafs and nodes. Leafs canìt have subelements while nodes can, and those can be leafs or nodes.
+
+Let's define an interface for the leaf classes:
+
+```
+interface Leaf {
+    void firstMethod();
+    void secondMethod(); 
+    ...
+}
+```
+
+Let's define some leaf classes:
+
+
+```
+class FirstLeaf implements Leaf {
+    @Override
+    void firstMethod() {
+        System.out.println("firstMethod implementation of FirstLeaf class")
+    }
+    
+    @Override
+    void secondMethod() {
+        System.out.println("secondMethod implementation of FirstLeaf class")
+    }; 
+}
+
+class SecondLeaf implements Leaf {
+    @Override
+    void firstMethod() {
+        System.out.println("firstMethod implementation of SecondLeaf class")
+    }
+    
+    @Override
+    void secondMethod() {
+        System.out.println("secondMethod implementation of SecondLeaf class")
+    }; 
+}
+```
 
 ## Decorator
 
