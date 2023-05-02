@@ -790,12 +790,11 @@ Let's define an interface for the generic node classes:
 ```
 interface Node {
     void firstMethod();
-    void secondMethod(); 
-    ...
+    void secondMethod();
 }
 ```
 
-Let's define some leaf classes:
+Let's define some simple node classes:
 
 ```
 class FirstNode implements Node {
@@ -836,9 +835,33 @@ class Composite implements Node {
     @Override
     void secondMethod() {
         System.out.println("secondMethod implementation of Composite class")
-    }; 
+    };
+    
+    void add(Node node) {
+        children.add(node);
+    }
+
+    void add(Node... nodes) {
+        children.addAll(Arrays.asList(nodes));
+    }
+
+    void remove(Node node) {
+        children.remove(node);
+    }
+
+    void remove(Node... nodes) {
+        children.removeAll(Arrays.asList(components));
+    }
+
+    void clear() {
+        children.clear();
+    }
 }
 ```
+
+As one may notice the Composite class allows insertion and remotion of child subelements.
+
+Also, as `Composite` class implements `Node` class, we can add other composite nodes to the list of children of another composite node, creating in this way a hierarchy tree.
 
 ## Decorator
 
