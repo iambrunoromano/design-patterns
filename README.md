@@ -717,6 +717,12 @@ In the same way we can have several classes that implement the interface logic o
 
 ```
 class FirstAbstraction implements Abstraction {
+    private Implementation implementation;
+    
+    FirstAbstraction(Implementation implementation) {
+        this.implementation = implementation;
+    }
+    
     @Override
     void firstInputMethod() {
         System.out.println("firstInputMethod implementation of FirstAbstraction class")
@@ -729,6 +735,12 @@ class FirstAbstraction implements Abstraction {
 }
 
 class SecondAbstraction implements Abstraction {
+    private Implementation implementation;
+    
+    SecondAbstraction(Implementation implementation) {
+        this.implementation = implementation;
+    }
+    
     @Override
     void firstInputMethod() {
         System.out.println("firstInputMethod implementation of SecondAbstraction class")
@@ -740,6 +752,24 @@ class SecondAbstraction implements Abstraction {
     }; 
 }
 ```
+
+As one may notice the abstraction layer needs the specific implementation to be provided, allowing to decouple the two layers one from the other. The consequence is that each abstraction class is instanciable with every implementation class and introduction of new abstraction-implementation couples remains clean and implies little pre-existing code modifications:
+
+
+```
+class Demo {
+    public static void main(String[] args) {
+        FirstImplementation firstImplementation = new FirstImplementation();
+        SecondImplementation secondImplementation = new SecondImplementation();
+        FirstAbstraction firstAbstraction = new FirstAbstraction(firstImplementation); //remains easy to instatiate corresponding abstraction-implementation couples
+        SecondAbstraction secondAbstraction = new SecondAbstraction(secondImplementation);
+        FirstAbstraction firstAbstraction = new FirstAbstraction(secondImplementation); //it's easy to instatiate new abstraction-implementation couples
+        SecondAbstraction secondAbstraction = new SecondAbstraction(firstImplementation);
+    }
+}
+```
+
+Without the use of the Bridge design pattern we should have a class for each new couple of abstraction-implementation, therefore the instation of `new FirstAbstraction(secondImplementation)` and `new SecondAbstraction(firstImplementation)` would require the definition of two new classes.
 
 </details>
 
