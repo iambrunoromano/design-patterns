@@ -1021,7 +1021,9 @@ The Flyweight design pattern allows more objects to fit in a defined amount of m
 <details>
   <summary>Click to know more about the Flyweight</summary>
 
-
+Objects usually have internal state divided in intrisic and extrinsic state. The intrinsic state is a constant set of data that can't be changed but only read. The rest of object state, that can be read and altered from outside, is called the extrinsic state.
+  
+The Flyweight design pattern optimizes memory usage by collecting the intrinsic state of several objects into a collection of few objects called flyweights that are then referenced by the several objects holding the extrinsic state.
 
 </details>
 
