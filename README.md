@@ -867,11 +867,44 @@ As one may notice the Composite class allows insertion and remotion of child sub
 
 Also, as `Composite` class implements `Node` class, we can add other composite nodes to the list of children of another composite node, creating in this way a hierarchy tree.
 
-Third and most important feature: with the override of both `firstMethod` and `secondMethod` from the `Composite` class we can propagate easily on the root node (which must be a composite node) the execution of both methods to all the composite and simple nodes down the tree. In this way we can deal with the whole hierarchy of objects as one single object iself.
+Third and most important feature: with the override of both `firstMethod` and `secondMethod` from the `Composite` class we can easily propagate the execution of both methods from the root node (which must be a composite node) to all the composite and simple nodes down the tree. In this way we can deal with the whole hierarchy of objects as one single object iself.
 
 </details>
 
 ## Decorator
+  
+The Decorator design pattern allows behaviour attaching to an object by placing it into a special wrapper object.
+
+<details>
+  <summary>Click to know more about the Decorator</summary>
+
+  Let's define an interface that declares the methods we want all the useful classes to implement:
+  
+```
+interface DoSomething {
+    void firstMethod();
+    void secondMethod();
+}
+```
+  
+Therefore a simple class implementing such an interface should be:
+
+```
+class BaseClass implements DoSomething {
+    @Override
+    void firstMethod() {
+        System.out.println("firstMethod implementation of BaseClass class");
+    }
+    
+    @Override
+    void secondMethod() {
+        System.out.println("secondMethod implementation of BaseClass class");    
+    }
+}
+```
+
+
+</details>
 
 ## Facade
 
