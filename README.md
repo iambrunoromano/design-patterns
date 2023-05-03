@@ -983,7 +983,34 @@ The Facade design pattern provides a simplified interface to an existing piece o
 <details>
   <summary>Click to know more about the Facade</summary>
 
+The design pattern is very straighfoward. Image you have a set of classes that expose functionalities that might be used together to achieve a certain goal:
+  
+```
+class FirstClass {
+  ...
+}
+  
+class SecondClass {
+  ...
+}
+  
+class ThirdClass {
+  ...
+}
+```
+  
+Instead of letting the client code compose the functionalities exposed by those classes to achieve the desired goal, expose to client code a single entrypoint that will take care to execute all the necessary steps to achieve the defined goal:
+  
+```
+class FacadeClass {
+  public void achieveGoal() {
+      // do here all the required steps using FirstClass, SecondClass, ThirdClass
+  }
+  ...
+}
+```
 
+This design pattern simply forces the producer of a certain piece of code to expose in a simple and managed way all the functionalities that may be interesting for the client, discouraging the delivery of code as a set of separate components which have to be used and managed on the client side.
 
 </details>
 
