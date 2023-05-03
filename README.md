@@ -1078,6 +1078,7 @@ A Proxy class can solve the tedious problem of code repetition. Imagine you have
   
 ```
 class Service {
+  
     void initFirstStep() {
         // do first step of the initialization
     }
@@ -1089,9 +1090,91 @@ class Service {
     void initThirdStep() {
         // do third step of the initialization
     }
+    ...
+  
+    void doSomethingFirst () {
+        // do something first
+    }
+  
+    void doSomethingSecond () {
+        // do something second
+    }
 }
 ```
   
+Imagine you need to explicitly call all the init step methods before using the two methods `doSomethingFirst` and `doSomethingSecond` which are the real service functionalities implementation. In such a case the risk is to duplicate and scatter the initialization code all over the code base, each time client code needs to use either `doSomethingFirst` or `doSomethingSecond`.
+
+An easy solution to this problem is to create an interface that is specifically thought for the service's functionalities:
+  
+```
+interface DoSomething {  
+    void doSomethingFirst ();  
+    void doSomethingSecond ();
+}
+```
+  
+If our `Service` implements DoSomething we can override the two functionality methods:
+  
+```
+class Service implements DoSomething {  
+    
+    void initFirstStep() {
+        // do first step of the initialization
+    }
+    ...
+  
+    @Override
+    void doSomethingFirst () {
+          // do something first
+    }
+  
+    @Override
+    void doSomethingSecond () {
+        // do something second
+    }
+}
+```
+  
+Therefore our proxy class shoud be implementing the same `DoSomething` interface but dealing with the nasty service initiliazion each time it is required:
+  
+```
+class ServiceProxy implements DoSomething {
+    private Service service;
+  
+    public ServiceProxy(Service service){
+        this.service = service;
+    }
+  
+    @Override
+    void doSomethingFirst () {
+        service.initFirstStep();
+        service.initSecondStep();
+        service.initFirstStep();
+        service.doSomethingFirst();
+    }
+  
+    @Override
+    void doSomethingSecond () {
+        service.initFirstStep();
+        service.initSecondStep();
+        service.initFirstStep();
+        service.doSomethingSecond();
+    }
+}
+```
+  
+In this way the client code can easily use the ServiceProxy as it was the Service itself:
+  
+```
+class Demo {
+    public static void main(String[] args) {
+        DoSomething service = new Service();
+        DoSomething serviceProxy = new ServiceProxy(service);
+        serviceProxy.doSomethingFirst(); // in this way we execute doSomethingFirst from service not taking care to explicitly init the service itself
+    }
+}
+```
+
 </details>
 
 # Behavioral Design Patterns
