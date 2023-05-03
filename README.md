@@ -903,6 +903,22 @@ class BaseClass implements DoSomething {
 }
 ```
 
+Instead a BaseDecorator class will possess a field of type DoSomething and will implement DoSomething so it can have the same interface of DoSomething objects to the external world while using an object with the same interface to accomplish the assigned tasks:
+  
+```
+class BaseDecorator implements DoSomething {
+    private DoSomething doSomething;
+    @Override
+    void firstMethod() {
+        doSomething.firstMethod();
+    }
+    
+    @Override
+    void secondMethod() {
+        doSomething.secondMethod();    
+    }
+}
+```
 
 </details>
 
