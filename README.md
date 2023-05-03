@@ -1068,6 +1068,13 @@ Using the IntrinsicFactory the client code can always memorize and control the i
 </details>
 
 ## Proxy
+  
+The Proxy design pattern provides an object acting as a substitute for a real service introducing new functionalities that can be used before or after the service use.
+
+<details>
+  <summary>Click to know more about the Flyweight</summary>
+  
+</details>
 
 # Behavioral Design Patterns
 
