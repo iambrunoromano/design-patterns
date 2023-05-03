@@ -908,6 +908,11 @@ Instead a BaseDecorator class will possess a field of type DoSomething and will 
 ```
 class BaseDecorator implements DoSomething {
     private DoSomething doSomething;
+  
+    public BaseDecorator(DoSomething doSomething) {
+        this.doSomething = doSomething;
+    }
+    
     @Override
     void firstMethod() {
         doSomething.firstMethod();
@@ -919,6 +924,55 @@ class BaseDecorator implements DoSomething {
     }
 }
 ```
+  
+We can now create some other decorator that will perform as well as BaseDecorator but exteding the behaviours of the overriden firstMethod and secondMethod:
+  
+```
+class OtherDecorator implements DoSomething {
+    private DoSomething doSomething;
+  
+    public OtherDecorator(DoSomething doSomething) {
+        this.doSomething = doSomething;
+    }
+    
+    @Override
+    void firstMethod() {
+        extendFirstMethod();
+        doSomething.firstMethod();
+    }
+    
+    @Override
+    void secondMethod() {
+        extendSecondMethod();
+        doSomething.secondMethod();    
+    }
+  
+    void extendFirstMethod() {
+        System.out.println("Exteding firstMethod behaviour");
+    }
+  
+    void extendSecondMethod() {
+        System.out.println("Exteding secondMethod behaviour");
+    }
+}
+```
+
+As one may notice the client code can easily use the BaseClass, the BaseDecorator or the OtherDecorator as all implementing the DoSomething interface:
+
+```
+class Demo {
+    public static void main(String[] args) {
+        DoSomething base = new BaseClass();
+        base.firstMethod(); // only executing BaseClass' firstMethod implementation
+        BaseDecorator baseDecorator = new BaseDecorator(base);
+        baseDecorator.firstMethod(); // only executing BaseClass' firstMethod implementation
+        OtherDecorator otherDecorator = new OtherDecorator(baseDecorator);
+        otherDecorator.firstMethod(); // executing extendFirstMethod and then BaseClass' firstMethod implementation
+    }
+}
+```
+  
+Extension of BaseDecorator, or OtherDecorator, is decoupled from the existing funcionalities: the introduction of a new decorator needs to take care only about the introduction of new functionalities. The use of the decorator pattern allows than to attach the defined functionality to the chosen DoSomething implemeting class: this reduces the number of defined classes in cases where we may need different combinations of several functionalities.
 
 </details>
 
