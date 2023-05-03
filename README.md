@@ -1025,39 +1025,27 @@ Objects usually have internal state divided in intrisic and extrinsic state. The
   
 The Flyweight design pattern optimizes memory usage by collecting the intrinsic state of several objects into a collection of few objects called flyweights that are then referenced by the several objects holding the extrinsic state.
 
-Imagine we have a class with some fields representing the intrinsic state fo some other class objects:
+Imagine we have a class with some fields representing the intrinsic state of some other class objects:
 
 ```
-class OtherDecorator implements DoSomething {
-    private DoSomething doSomething;
-  
-    public OtherDecorator(DoSomething doSomething) {
-        this.doSomething = doSomething;
-    }
-    
-    @Override
-    void firstMethod() {
-        extendFirstMethod();
-        doSomething.firstMethod();
-    }
-    
-    @Override
-    void secondMethod() {
-        extendSecondMethod();
-        doSomething.secondMethod();    
-    }
-  
-    void extendFirstMethod() {
-        System.out.println("Exteding firstMethod behaviour");
-    }
-  
-    void extendSecondMethod() {
-        System.out.println("Exteding secondMethod behaviour");
-    }
+class Intrinsic {
+    private String firstField;
+    private String secondField;
+    private String thirdField;
+    ...
 }
 ```
 
-Imagine we have a class with some fields (extrinsic state) and a field of re
+Imagine we have a class with some fields representing the extrinsic state:
+  
+```
+class Extrinsic {
+    private String fieldOne;
+    private String fieldTwo;
+    private String fieldThree;
+    ...
+}
+```
 
 </details>
 
