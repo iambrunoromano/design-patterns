@@ -1031,7 +1031,6 @@ Imagine we have a class with some fields representing the intrinsic state of som
 class Intrinsic {
     private String firstField;
     private String secondField;
-    private String thirdField;
     ...
 }
 ```
@@ -1042,11 +1041,30 @@ Imagine we have a class with some fields representing the extrinsic state:
 class Extrinsic {
     private String fieldOne;
     private String fieldTwo;
-    private String fieldThree;
+    ...
+    private Intrinsic intrinsic;
     ...
 }
 ```
+  
+As one may notice the Extrinsic class contains an attribute to the intrinsic one. In this way each Extrinsic object will reference one of the few Intrinsic ones, and eahc time a new intrinsic one is needed it will be created and stored without duplicates:
+  
+```
+class IntrinsicFactory {
+    static Map<String,Intrinsic> intrinsicTypes = new HashMap<>();
+    static Intrinsic getIntrinsic(String firstField, String secondField,String fieldOne, String fieldTwo) {
+        Intrinsic intrinsic = intrinsicTypes.get(firstField);
+        if(intrinsic==null) {
+            intrinsic = new Intrinsic(firstField, secondField);
+            intrinsicTypes.put(firstField, intrinsic);
+        }
+        return intrinsic;
+    }
+}
+```
 
+Using the IntrinsicFactory the client code can always memorize and control the intrinsic states, with the condition of being one for each possible value of `firstField`. Therefore, since Intrinsic objects are referenced in Extrinsic ones, the memory used will be shared across the latter.
+  
 </details>
 
 ## Proxy
