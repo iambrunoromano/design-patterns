@@ -972,7 +972,7 @@ class Demo {
 }
 ```
   
-Extension of BaseDecorator, or OtherDecorator, is decoupled from the existing funcionalities: the introduction of a new decorator needs to take care only about the introduction of new functionalities. The use of the decorator pattern allows than to attach the defined functionality to the chosen DoSomething implemeting class: this reduces the number of defined classes in cases where we may need different combinations of several functionalities.
+Extension of BaseDecorator or OtherDecorator behaviour is therefore decoupled from the existing funcionalities: the introduction of a new decorator needs to take care only about the introduction of new functionalities. The use of the decorator pattern allows than to attach the defined functionality to the chosen DoSomething implemeting class: this reduces the number of defined classes in cases where we may need different combinations of several functionalities.
 
 </details>
 
