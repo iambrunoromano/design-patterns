@@ -783,8 +783,6 @@ The Composite design pattern allows the creation of objects in a tree-like struc
 Imagine that the business logic requires a tree structure of classes where we can have simple nodes and composite nodes. 
 
 Simple nodes can't have subelements while composite nodes can, and those can be simple or composite nodes.
-  
-For simplicity we will consider all nodes as composite, and simple nodes are composite ones without children.
 
 Let's define an interface for the generic node classes:
 
