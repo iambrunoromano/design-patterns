@@ -1074,6 +1074,24 @@ The Proxy design pattern provides an object acting as a substitute for a real se
 <details>
   <summary>Click to know more about the Flyweight</summary>
   
+A Proxy class can solve the tedious problem of code repetition. Imagine you have some service needing complex initilization before its usage:
+  
+```
+class Service {
+    void initFirstStep() {
+        // do first step of the initialization
+    }
+  
+    void initSecondStep() {
+        // do second step of the initialization
+    }
+  
+    void initThirdStep() {
+        // do third step of the initialization
+    }
+}
+```
+  
 </details>
 
 # Behavioral Design Patterns
