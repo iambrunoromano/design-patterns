@@ -977,6 +977,15 @@ Extension of BaseDecorator or OtherDecorator behaviour is therefore decoupled fr
 </details>
 
 ## Facade
+  
+The Facade design pattern provides a simplified interface to an existing piece of code which may consist of a complex set of classes.
+
+<details>
+  <summary>Click to know more about the Facade</summary>
+
+
+
+</details>
 
 ## Flyweight
 
