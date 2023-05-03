@@ -1016,6 +1016,15 @@ This design pattern simply forces the producer of a certain piece of code to exp
 
 ## Flyweight
 
+The Flyweight design pattern allows more objects to fit in a defined amount of memory by sharing common parts of internal state.
+
+<details>
+  <summary>Click to know more about the Flyweight</summary>
+
+
+
+</details>
+
 ## Proxy
 
 # Behavioral Design Patterns
