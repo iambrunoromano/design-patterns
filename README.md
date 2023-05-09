@@ -1187,6 +1187,12 @@ Behavioral design patterns take care of dealing with algorithms and responsibili
 
 ## Chain of Responsibility
 
+The Chain of Responsibility design pattern allows requests passing along a chain of potential handlers until one of them handles the request.
+
+<details>
+  <summary>Click to know more about the Chain of Responsibility</summary>
+</details>
+
 ## Command
 
 ## Iterator
