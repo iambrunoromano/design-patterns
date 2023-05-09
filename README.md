@@ -1293,6 +1293,26 @@ abstract class SpecificCommand extends Command {
     } 
 }
 ```
+
+Defining several classes like SpecificCommand allows us to customize the `execute()` behaviour.
+
+Introducing now a `CommandHistory` class to manage the stack of commands allows us to easily navigate those:
+  
+```
+class CommandHistory {
+    private Stack<Command> history = new Stack<>();
+  
+    public void push(Command command) {
+        history.push(command);
+    }
+  
+    public Command pop() {
+        return history.pop();
+    }
+  
+    public boolean isEmpty() { return history.isEmpty();}
+}
+```
 </details>
 
 ## Iterator
