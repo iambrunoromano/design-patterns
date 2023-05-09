@@ -1219,6 +1219,8 @@ abstract class Handler {
     }
 }
 ```
+  
+As one may notice the `link` method allows dynamic handler linking and head moving. The `check` method implementation is instead delegated to the specific child handler class. The `checkNext` method instead propagates the check up to the head of the chain.  
 
 </details>
 
