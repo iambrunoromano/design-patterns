@@ -1072,7 +1072,7 @@ Using the IntrinsicFactory the client code can always memorize and control the i
 The Proxy design pattern provides an object acting as a substitute for a real service introducing new functionalities that can be used before or after the service use.
 
 <details>
-  <summary>Click to know more about the Flyweight</summary>
+  <summary>Click to know more about the Proxy</summary>
   
 A Proxy class can solve the tedious problem of code repetition. Imagine you have some service needing complex initilization before its usage:
   
