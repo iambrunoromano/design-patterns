@@ -1236,6 +1236,16 @@ abstract class SpecificHandler extends Handler {
 ```
   
 The `checkNext` method to propagate the request handling can be inserted at the beginning or at the end of the `check` method. This allows an handler along the chain to change the order of checks.
+  
+    
+```
+class Demo {
+    public static void main(String[] args) {
+        Handler handler = Handler.link(new SpecificHandler(), new SpecificHandler()); // setting up the chain
+        handler.check("test"); // triggering check responsibility chain
+    }
+}
+```
 
 </details>
 
