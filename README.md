@@ -11,6 +11,8 @@ Methods implementation and attribute values are skip to leave the code readable.
 
 # Creational Design Patterns
 
+Creational design patterns allow several object creation mechanisms that increase flexibility and code reuse.
+
 ## Abstract Factory
 
 The Abstract Factory design pattern provides and easy way to create families of related objects without specifying their
@@ -550,6 +552,8 @@ class Singleton {
 </details>
 
 # Structural Design Patterns
+
+Structural design patterns allow objects and classes assembling while keeping the resulting structures flexibles and efficient.  
 
 ## Adapter
 
@@ -1178,6 +1182,8 @@ class Demo {
 </details>
 
 # Behavioral Design Patterns
+  
+Behavioral design patterns take care of dealing with algorithms and responsibilities between different objects.
 
 ## Chain of Responsibility
 
