@@ -1191,6 +1191,35 @@ The Chain of Responsibility design pattern allows requests passing along a chain
 
 <details>
   <summary>Click to know more about the Chain of Responsibility</summary>
+  
+The chain of handlers decouple the request sender class to the concrete receivers classes. Moreover, the chain can be dynamically composed at runtime.
+  
+To define an handler we need two main methods: a method to link the handler to its next one and a method to handle the request:
+  
+```
+abstract class Handler {
+    private Handler nextHandler;
+    
+    public static Handler link(Handler firstHandler, Handler... chain) {
+        Handler head = firstHandler;
+        for (Handler nextHandler : chain) {
+            head.nextHandler = nextHandler;
+            head = nextHandler;
+        }
+        return firstHandler;
+    }
+  
+    public abstract boolean check(String someInput);
+  
+    protected boolean checkNext(String someInput) {
+        if (nextHandler == null) {
+            return true;
+        }
+        return next.check(someInput);
+    }
+}
+```
+
 </details>
 
 ## Command
