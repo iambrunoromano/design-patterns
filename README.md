@@ -1263,7 +1263,7 @@ abstract class Command {
     public Operator operator; // an object that can execute operations
   
     Command(Operator operator){
-        this.editor = editor;
+        this.operator = operator;
     }
   
     void doFirstOperation() {
@@ -1276,9 +1276,23 @@ abstract class Command {
   
     public abstract boolean execute(); // method to execute the command  
 }
-  
 ```
 
+Therefore a simple `SpecificCommand` class will be :
+  
+```
+abstract class SpecificCommand extends Command {  
+    SpecificCommand(Operator operator){
+        super(operator);
+    }
+  
+    @Override
+    public boolean execute() {
+        operator.prepareToFirstAndSecondStep();
+        return false;
+    } 
+}
+```
 </details>
 
 ## Iterator
