@@ -1250,6 +1250,36 @@ class Demo {
 </details>
 
 ## Command
+  
+The Command design pattern converts requests or simple operations into objects.
+
+<details>
+  <summary>Click to know more about the Command</summary>
+  
+  The Command design pattern allows the creation of a `Command` class with a delegating `execute` method:
+  
+```
+abstract class Command {
+    public Operator operator; // an object that can execute operations
+  
+    Command(Operator operator){
+        this.editor = editor;
+    }
+  
+    void doFirstOperation() {
+        operator.firstOperation();
+    }
+  
+    void doSecondOperation() {
+        operator.secondOperation();
+    }
+  
+    public abstract boolean execute(); // method to execute the command  
+}
+  
+```
+
+</details>
 
 ## Iterator
 
