@@ -1278,17 +1278,30 @@ abstract class Command {
 }
 ```
 
-Therefore a simple `SpecificCommand` class will be :
+Therefore a set of simple `SpecificCommand` classes will be :
   
 ```
-abstract class SpecificCommand extends Command {  
-    SpecificCommand(Operator operator){
+class FirstSpecificCommand extends Command {  
+    FirstSpecificCommand(Operator operator){
         super(operator);
     }
   
     @Override
     public boolean execute() {
         operator.prepareToFirstAndSecondStep();
+        return false;
+    } 
+}
+  
+  
+class SecondSpecificCommand extends Command {  
+    SecondSpecificCommand(Operator operator){
+        super(operator);
+    }
+  
+    @Override
+    public boolean execute() {
+        operator.prepareToSecondAndFirstStep();
         return false;
     } 
 }
@@ -1313,6 +1326,27 @@ class CommandHistory {
     public boolean isEmpty() { return history.isEmpty();}
 }
 ```
+  
+In this way we can use all the commands like in the following demo:
+  
+```
+class Demo {
+    public static void main(String[] args) {
+        Operator operator = new Operator();
+        CommandHistory history = new CommandHistory();
+        boolean someCondition = true; // init some boolean variable to add commands to history
+        if(someCondition) {
+            history.push(new FirstSpecificCommand(operator));
+        }
+        if(someCondition) {
+            history.push(new SecondSpecificCommand(operator));
+        }
+    }
+}
+```
+
+//TODO: review the command design pattern
+
 </details>
 
 ## Iterator
