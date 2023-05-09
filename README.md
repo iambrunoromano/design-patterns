@@ -1192,9 +1192,9 @@ The Chain of Responsibility design pattern allows requests passing along a chain
 <details>
   <summary>Click to know more about the Chain of Responsibility</summary>
   
-The chain of handlers decouple the request sender class to the concrete receivers classes. Moreover, the chain can be dynamically composed at runtime.
+The chain of handlers decouples the request sender class from the concrete receivers classes. Moreover, the chain can be dynamically composed at runtime.
   
-To define an handler we need two main methods: a method to link the handler to its next one and a method to handle the request:
+To define an handler we need two main methods: a `link` method to link the handler to its next one and a `check` method to handle the request:
   
 ```
 abstract class Handler {
@@ -1220,7 +1220,7 @@ abstract class Handler {
 }
 ```
   
-As one may notice the `link` method allows dynamic handler linking and head moving. The `check` method implementation is instead delegated to the specific child handler class. The `checkNext` method instead propagates the check up to the head of the chain.  
+As one may notice the `link` method allows dynamic handler linking and head moving. The `check` method implementation is instead delegated to the specific child handler class. The `checkNext` method instead propagates the check along the chain.  
   
 A specific handler class may be:
   
