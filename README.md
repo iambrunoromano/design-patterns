@@ -553,7 +553,8 @@ class Singleton {
 
 # Structural Design Patterns
 
-Structural design patterns allow objects and classes assembling while keeping the resulting structures flexibles and efficient.  
+Structural design patterns allow objects and classes assembling while keeping the resulting structures flexibles and
+efficient.
 
 ## Adapter
 
@@ -640,11 +641,12 @@ class Demo {
 
 ## Bridge
 
-The Bridge design pattern allows to split a closely correlated set of classes into separate hierarchies named abstraction and implementation that can be develop indipendently from each other.
+The Bridge design pattern allows to split a closely correlated set of classes into separate hierarchies named
+abstraction and implementation that can be develop indipendently from each other.
 
 <details>
   <summary>Click to know more about the Bridge</summary>
-  
+
 Imagine you have a set of classes that should perform some actions based on given inputs:
 
 ```
@@ -669,9 +671,12 @@ class DoesSomethingByInteger {
 }
 ```
 
-As you can see, each time we want to add use use the same feature `reallyDoIt(String input)` we need to create a new class.
+As you can see, each time we want to add use use the same feature `reallyDoIt(String input)` we need to create a new
+class.
 
-This happens because we do not separate the `abstraction` (the interface with the external world of the chosen class, in our cases the methods: `doSomething(String input)` and `doSomething(Integer input)doSomething(Integer input)`) from the `implementation` (the actually exposed chosen class functionality, the method  `reallyDoIt(String input)`).
+This happens because we do not separate the `abstraction` (the interface with the external world of the chosen class, in
+our cases the methods: `doSomething(String input)` and `doSomething(Integer input)doSomething(Integer input)`) from
+the `implementation` (the actually exposed chosen class functionality, the method  `reallyDoIt(String input)`).
 
 To separate abstraction from implementation one has to declare two separate interfaces:
 
@@ -716,7 +721,7 @@ class SecondImplementation implements Implementation {
     }; 
 }
 ```
- 
+
 In the same way we can have several classes that implement the interface logic of the `Abstraction`:
 
 ```
@@ -757,8 +762,10 @@ class SecondAbstraction implements Abstraction {
 }
 ```
 
-As one may notice the abstraction layer needs the specific implementation to be provided, allowing to decouple the two layers one from the other. The consequence is that each abstraction class is instanciable with every implementation class and introduction of new abstraction-implementation couples remains clean and implies little pre-existing code modifications:
-
+As one may notice the abstraction layer needs the specific implementation to be provided, allowing to decouple the two
+layers one from the other. The consequence is that each abstraction class is instanciable with every implementation
+class and introduction of new abstraction-implementation couples remains clean and implies little pre-existing code
+modifications:
 
 ```
 class Demo {
@@ -773,18 +780,21 @@ class Demo {
 }
 ```
 
-Without the use of the Bridge design pattern we should have a class for each new couple of abstraction-implementation, therefore the instation of `new FirstAbstraction(secondImplementation)` and `new SecondAbstraction(firstImplementation)` would require the definition of two new classes.
+Without the use of the Bridge design pattern we should have a class for each new couple of abstraction-implementation,
+therefore the instation of `new FirstAbstraction(secondImplementation)` and `new SecondAbstraction(firstImplementation)`
+would require the definition of two new classes.
 
 </details>
 
 ## Composite
 
-The Composite design pattern allows the creation of objects in a tree-like structure allowing to work on the tree as it was a singular object.
+The Composite design pattern allows the creation of objects in a tree-like structure allowing to work on the tree as it
+was a singular object.
 
 <details>
   <summary>Click to know more about the Composite</summary>
 
-Imagine that the business logic requires a tree structure of classes where we can have simple nodes and composite nodes. 
+Imagine that the business logic requires a tree structure of classes where we can have simple nodes and composite nodes.
 
 Simple nodes can't have subelements while composite nodes can, and those can be simple or composite nodes.
 
@@ -869,28 +879,32 @@ class Composite implements Node {
 
 As one may notice the Composite class allows insertion and remotion of child subelements.
 
-Also, as `Composite` class implements `Node` class, we can add other composite nodes to the list of children of another composite node, creating in this way a hierarchy tree.
+Also, as `Composite` class implements `Node` class, we can add other composite nodes to the list of children of another
+composite node, creating in this way a hierarchy tree.
 
-Third and most important feature: with the override of both `firstMethod` and `secondMethod` from the `Composite` class we can easily propagate the execution of both methods from the root node (which must be a composite node) to all the composite and simple nodes down the tree. In this way we can deal with the whole hierarchy of objects as one single object iself.
+Third and most important feature: with the override of both `firstMethod` and `secondMethod` from the `Composite` class
+we can easily propagate the execution of both methods from the root node (which must be a composite node) to all the
+composite and simple nodes down the tree. In this way we can deal with the whole hierarchy of objects as one single
+object iself.
 
 </details>
 
 ## Decorator
-  
+
 The Decorator design pattern allows behaviour attaching to an object by placing it into a special wrapper object.
 
 <details>
   <summary>Click to know more about the Decorator</summary>
 
-  Let's define an interface that declares the methods we want all the useful classes to implement:
-  
+Let's define an interface that declares the methods we want all the useful classes to implement:
+
 ```
 interface DoSomething {
     void firstMethod();
     void secondMethod();
 }
 ```
-  
+
 Therefore a simple class implementing such an interface should be:
 
 ```
@@ -907,8 +921,10 @@ class BaseClass implements DoSomething {
 }
 ```
 
-Instead a BaseDecorator class will possess a field of type DoSomething and will implement DoSomething so it can have the same interface of DoSomething objects to the external world while using an object with the same interface to accomplish the assigned tasks:
-  
+Instead a BaseDecorator class will possess a field of type DoSomething and will implement DoSomething so it can have the
+same interface of DoSomething objects to the external world while using an object with the same interface to accomplish
+the assigned tasks:
+
 ```
 class BaseDecorator implements DoSomething {
     private DoSomething doSomething;
@@ -928,9 +944,10 @@ class BaseDecorator implements DoSomething {
     }
 }
 ```
-  
-We can now create some other decorator that will perform as well as BaseDecorator but exteding the behaviours of the overriden firstMethod and secondMethod:
-  
+
+We can now create some other decorator that will perform as well as BaseDecorator but exteding the behaviours of the
+overriden firstMethod and secondMethod:
+
 ```
 class OtherDecorator implements DoSomething {
     private DoSomething doSomething;
@@ -961,7 +978,8 @@ class OtherDecorator implements DoSomething {
 }
 ```
 
-As one may notice the client code can easily use the BaseClass, the BaseDecorator or the OtherDecorator as all implementing the DoSomething interface:
+As one may notice the client code can easily use the BaseClass, the BaseDecorator or the OtherDecorator as all
+implementing the DoSomething interface:
 
 ```
 class Demo {
@@ -975,20 +993,25 @@ class Demo {
     }
 }
 ```
-  
-Extension of BaseDecorator or OtherDecorator behaviour is therefore decoupled from the existing funcionalities: the introduction of a new decorator needs to take care only about the introduction of new functionalities. The use of the decorator pattern allows than to attach the defined functionality to the chosen DoSomething implemeting class: this reduces the number of defined classes in cases where we may need different combinations of several functionalities.
+
+Extension of BaseDecorator or OtherDecorator behaviour is therefore decoupled from the existing funcionalities: the
+introduction of a new decorator needs to take care only about the introduction of new functionalities. The use of the
+decorator pattern allows than to attach the defined functionality to the chosen DoSomething implemeting class: this
+reduces the number of defined classes in cases where we may need different combinations of several functionalities.
 
 </details>
 
 ## Facade
-  
-The Facade design pattern provides a simplified interface to an existing piece of code which may consist of a complex set of classes.
+
+The Facade design pattern provides a simplified interface to an existing piece of code which may consist of a complex
+set of classes.
 
 <details>
   <summary>Click to know more about the Facade</summary>
 
-The design pattern is very straighfoward. Image you have a set of classes that expose functionalities that might be used together to achieve a certain goal:
-  
+The design pattern is very straighfoward. Image you have a set of classes that expose functionalities that might be used
+together to achieve a certain goal:
+
 ```
 class FirstClass {
   ...
@@ -1002,9 +1025,11 @@ class ThirdClass {
   ...
 }
 ```
-  
-Instead of letting the client code compose the functionalities exposed by those classes to achieve the desired goal, expose to client code a single entrypoint that will take care to execute all the necessary steps to achieve the defined goal:
-  
+
+Instead of letting the client code compose the functionalities exposed by those classes to achieve the desired goal,
+expose to client code a single entrypoint that will take care to execute all the necessary steps to achieve the defined
+goal:
+
 ```
 class FacadeClass {
   public void achieveGoal() {
@@ -1014,20 +1039,26 @@ class FacadeClass {
 }
 ```
 
-This design pattern simply forces the producer of a certain piece of code to expose in a simple and managed way all the functionalities that may be interesting for the client, discouraging the delivery of code as a set of separate components which have to be used and managed on the client side.
+This design pattern simply forces the producer of a certain piece of code to expose in a simple and managed way all the
+functionalities that may be interesting for the client, discouraging the delivery of code as a set of separate
+components which have to be used and managed on the client side.
 
 </details>
 
 ## Flyweight
 
-The Flyweight design pattern allows more objects to fit in a defined amount of memory by sharing common parts of internal state.
+The Flyweight design pattern allows more objects to fit in a defined amount of memory by sharing common parts of
+internal state.
 
 <details>
   <summary>Click to know more about the Flyweight</summary>
 
-Objects usually have internal state divided in intrisic and extrinsic state. The intrinsic state is a constant set of data that can't be changed but only read. The rest of object state, that can be read and altered from outside, is called the extrinsic state.
-  
-The Flyweight design pattern optimizes memory usage by collecting the intrinsic state of several objects into a collection of few objects called flyweights that are then referenced by the several objects holding the extrinsic state.
+Objects usually have internal state divided in intrisic and extrinsic state. The intrinsic state is a constant set of
+data that can't be changed but only read. The rest of object state, that can be read and altered from outside, is called
+the extrinsic state.
+
+The Flyweight design pattern optimizes memory usage by collecting the intrinsic state of several objects into a
+collection of few objects called flyweights that are then referenced by the several objects holding the extrinsic state.
 
 Imagine we have a class with some fields representing the intrinsic state of some other class objects:
 
@@ -1040,7 +1071,7 @@ class Intrinsic {
 ```
 
 Imagine we have a class with some fields representing the extrinsic state:
-  
+
 ```
 class Extrinsic {
     private String fieldOne;
@@ -1050,9 +1081,11 @@ class Extrinsic {
     ...
 }
 ```
-  
-As one may notice the Extrinsic class contains an attribute to the intrinsic one. In this way each Extrinsic object will reference one of the few Intrinsic ones, and eahc time a new intrinsic one is needed it will be created and stored without duplicates:
-  
+
+As one may notice the Extrinsic class contains an attribute to the intrinsic one. In this way each Extrinsic object will
+reference one of the few Intrinsic ones, and eahc time a new intrinsic one is needed it will be created and stored
+without duplicates:
+
 ```
 class IntrinsicFactory {
     static Map<String,Intrinsic> intrinsicTypes = new HashMap<>();
@@ -1067,19 +1100,23 @@ class IntrinsicFactory {
 }
 ```
 
-Using the IntrinsicFactory the client code can always memorize and control the intrinsic states, with the condition of being one for each possible value of `firstField`. Therefore, since Intrinsic objects are referenced in Extrinsic ones, the memory used will be shared across the latter.
-  
+Using the IntrinsicFactory the client code can always memorize and control the intrinsic states, with the condition of
+being one for each possible value of `firstField`. Therefore, since Intrinsic objects are referenced in Extrinsic ones,
+the memory used will be shared across the latter.
+
 </details>
 
 ## Proxy
-  
-The Proxy design pattern provides an object acting as a substitute for a real service introducing new functionalities that can be used before or after the service use.
+
+The Proxy design pattern provides an object acting as a substitute for a real service introducing new functionalities
+that can be used before or after the service use.
 
 <details>
   <summary>Click to know more about the Proxy</summary>
-  
-A Proxy class can solve the tedious problem of code repetition. Imagine you have some service needing complex initilization before its usage:
-  
+
+A Proxy class can solve the tedious problem of code repetition. Imagine you have some service needing complex
+initilization before its usage:
+
 ```
 class Service {
   
@@ -1105,20 +1142,24 @@ class Service {
     }
 }
 ```
-  
-Imagine you need to explicitly call all the init step methods before using the two methods `doSomethingFirst` and `doSomethingSecond` which are the real service functionalities implementation. In such a case the risk is to duplicate and scatter the initialization code all over the code base, each time client code needs to use either `doSomethingFirst` or `doSomethingSecond`.
 
-An easy solution to this problem is to create an interface that is specifically thought for the service's functionalities:
-  
+Imagine you need to explicitly call all the init step methods before using the two methods `doSomethingFirst`
+and `doSomethingSecond` which are the real service functionalities implementation. In such a case the risk is to
+duplicate and scatter the initialization code all over the code base, each time client code needs to use
+either `doSomethingFirst` or `doSomethingSecond`.
+
+An easy solution to this problem is to create an interface that is specifically thought for the service's
+functionalities:
+
 ```
 interface DoSomething {  
     void doSomethingFirst ();  
     void doSomethingSecond ();
 }
 ```
-  
+
 If our `Service` implements DoSomething we can override the two functionality methods:
-  
+
 ```
 class Service implements DoSomething {  
     
@@ -1138,9 +1179,10 @@ class Service implements DoSomething {
     }
 }
 ```
-  
-Therefore our proxy class shoud be implementing the same `DoSomething` interface but dealing with the nasty service initiliazion each time it is required:
-  
+
+Therefore our proxy class shoud be implementing the same `DoSomething` interface but dealing with the nasty service
+initiliazion each time it is required:
+
 ```
 class ServiceProxy implements DoSomething {
     private Service service;
@@ -1166,9 +1208,9 @@ class ServiceProxy implements DoSomething {
     }
 }
 ```
-  
+
 In this way the client code can easily use the ServiceProxy as it was the Service itself:
-  
+
 ```
 class Demo {
     public static void main(String[] args) {
@@ -1182,20 +1224,23 @@ class Demo {
 </details>
 
 # Behavioral Design Patterns
-  
+
 Behavioral design patterns take care of dealing with algorithms and responsibilities between different objects.
 
 ## Chain of Responsibility
 
-The Chain of Responsibility design pattern allows requests passing along a chain of potential handlers until one of them handles the request.
+The Chain of Responsibility design pattern allows requests passing along a chain of potential handlers until one of them
+handles the request.
 
 <details>
   <summary>Click to know more about the Chain of Responsibility</summary>
-  
-The chain of handlers decouples the request sender class from the concrete receivers classes. Moreover, the chain can be dynamically composed at runtime.
-  
-To define an handler we need two main methods: a `link` method to link the handler to its next one and a `check` method to handle the request:
-  
+
+The chain of handlers decouples the request sender class from the concrete receivers classes. Moreover, the chain can be
+dynamically composed at runtime.
+
+To define an handler we need two main methods: a `link` method to link the handler to its next one and a `check` method
+to handle the request:
+
 ```
 abstract class Handler {
     private Handler nextHandler;
@@ -1219,11 +1264,13 @@ abstract class Handler {
     }
 }
 ```
-  
-As one may notice the `link` method allows dynamic handler linking and head moving. The `check` method implementation is instead delegated to the specific child handler class. The `checkNext` method instead propagates the check along the chain.  
-  
+
+As one may notice the `link` method allows dynamic handler linking and head moving. The `check` method implementation is
+instead delegated to the specific child handler class. The `checkNext` method instead propagates the check along the
+chain.
+
 A specific handler class may be:
-  
+
 ```
 abstract class SpecificHandler extends Handler {  
     public abstract boolean check(String someInput) {
@@ -1234,10 +1281,10 @@ abstract class SpecificHandler extends Handler {
     }
 }
 ```
-  
-The `checkNext` method to propagate the request handling can be inserted at the beginning or at the end of the `check` method. This allows an handler along the chain to change the order of checks.
-  
-    
+
+The `checkNext` method to propagate the request handling can be inserted at the beginning or at the end of the `check`
+method. This allows an handler along the chain to change the order of checks.
+
 ```
 class Demo {
     public static void main(String[] args) {
@@ -1250,14 +1297,14 @@ class Demo {
 </details>
 
 ## Command
-  
+
 The Command design pattern converts requests or simple operations into objects.
 
 <details>
   <summary>Click to know more about the Command</summary>
-  
-  The Command design pattern allows the creation of a `Command` class with a delegating `execute` method:
-  
+
+The Command design pattern allows the creation of a `Command` class with a delegating `execute` method:
+
 ```
 abstract class Command {
     public Operator operator; // an object that can execute operations
@@ -1279,7 +1326,7 @@ abstract class Command {
 ```
 
 Therefore a set of simple `SpecificCommand` classes will be :
-  
+
 ```
 class FirstSpecificCommand extends Command {  
     FirstSpecificCommand(Operator operator){
@@ -1310,7 +1357,7 @@ class SecondSpecificCommand extends Command {
 Defining several classes like SpecificCommand allows us to customize the `execute()` behaviour.
 
 Introducing now a `CommandHistory` class to manage the stack of commands allows us to easily navigate those:
-  
+
 ```
 class CommandHistory {
     private Stack<Command> history = new Stack<>();
@@ -1326,9 +1373,9 @@ class CommandHistory {
     public boolean isEmpty() { return history.isEmpty();}
 }
 ```
-  
+
 In this way we can use all the commands like in the following demo:
-  
+
 ```
 class Demo {
     public static void main(String[] args) {
@@ -1345,15 +1392,231 @@ class Demo {
 }
 ```
 
-//TODO: review the command design pattern
+In this way we're adding several commands to the `CommandHistory` without the need for instantaneous execution. Those
+can be then executed scrolling the `CommandHistory` itself.
 
 </details>
 
 ## Iterator
 
+The Iterator design pattern allows traversing collection's elements without exposing the underlying representation (
+list, stack, tree, etc.)
+
+<details>
+  <summary>Click to know more about the Iterator</summary>
+
+Collections are datatypes that contain group of objects. Since collections can also be graphs or trees, traversal
+behaviours can be changing. The Iterator design pattern allows isolation and extraction of the traversal behaviour into
+a separate object called `Iterator`.
+
+Let's create a first `Iterator` interface which defines the main iterator methods to be implemented:
+
+```
+interface Iterator {
+    boolean hasNext();
+    
+    FirstObject getNext();
+    
+    void reset();
+}
+```
+
+A couple of different `ConcreteIterator` would be:
+
+```
+class FirstConcreteIterator implements Iterator {
+    private int currentPosition = 0;
+    private List<FirstObject> firstObjectList = new ArrayList<>();
+    
+    public FirstConcreteIterator(List<FirstObject> firstObjectList){
+        this.firstObjectList = firstObjectList;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return currentPosition < firstObjectList.size();
+    }
+    
+    @Override
+    public FirstObject getNext() {
+        if (!hasNext()) {
+            return null;
+        }
+        FirstObject nextFirstObject = firstObjectList.get(currentPosition);
+        currentPosition++;
+        return nextFirstObject;
+    }
+    
+    @Override
+    public void reset() {
+        currentPosition = 0;
+    }
+}
+```
+
+Let's imagine now some client code would need to access to the elements of `firstObjectList` without knowing such access
+algorithm implementation details:
+
+```
+class Demo {
+    public static void main(String[] args) {
+        List<FirstObject> firstObjectList = Arrays.asList(new FirstObject(), new FirstObject(), ...);
+        FirstConcreteIterator firstConcreteIterator = new FirstConcreteIterator(firstObjectList);
+        while(firstConcreteIterator.hasNext()){
+            FirstObject firstObject = firstConcreteIterator.getNext();
+            firstObject.doSomething();        
+        }
+    }
+}
+```
+
+</details>
+
 ## Mediator
 
+The Mediator design pattern allows chaotic dependencies reduction imposing objects collaboration via a mediator object
+only.
+
+<details>
+  <summary>Click to know more about the Mediator</summary>
+
+Imagine you have a series of classes that need to cooperate with each other. The nature of such cooperation can depend
+on several factors. Instead of implementing the logic of collaboration and communication between classes in the classes
+themselves the classes will naturally become less usable.
+
+The creation of a mediator ceases all the direct collaborations between objects, offering to the components mutual
+independence and reusability. Mediator centralizes information exchange between software components.
+
+Let's call the classes that need to cooperate as `Components`:
+
+```
+interface Component {
+    void setMediator(Mediator mediator);
+    String getName();
+    void perfomComponentOperation();
+}
+```
+
+Therefore, the `Concrete Components` will implement the `Component` interface:
+
+```
+class FirstConcreteComponent implements Component {
+    private Mediator mediator;
+    
+    @Override
+    void setMediator(Mediator mediator){
+        this.mediator = mediator;
+    }
+    
+    @Override
+    String getName(){
+        return "firstConcreteComponent";
+    }
+    
+    @Override
+    void perfomComponentOperation(){
+        // Here ConcreteComponent operation
+    }
+}
+
+class SecondConcreteComponent implements Component {
+    private Mediator mediator;
+    
+    @Override
+    void setMediator(Mediator mediator){
+        this.mediator = mediator;
+    }
+    
+    @Override
+    String getName(){
+        return "secondConcreteComponent";
+    }
+    
+    @Override
+    void perfomComponentOperation(){
+        // Here ConcreteComponent operation
+    }
+}
+```
+
+The `Mediator` will be defined by the following interface:
+
+```
+interface Mediator {
+    void doSomething();
+    void doSomethingElse();
+    void registerComponent(Component component);
+}
+```
+
+The `Concrete Mediator` will implement the `Mediator` interface:
+
+```
+class ConcreteMediator implements Mediator {
+    private FirstConcreteComponent firstConcreteComponent;
+    private SecondConcreteComponent secondConcreteComponent;
+    
+    @Override
+    void registerComponent(Component component){
+        component.setMediator(this);
+        switch (component.getName()) {
+            case "firstConcreteComponent":
+                firstConcreteComponent = (FirstConcreteComponent)component;
+                break;
+            case "secondConcreteComponent":
+                secondConcreteComponent = (SecondConcreteComponent)component;
+                break;
+    }
+    
+    @Override
+    String doSomething(){
+        firstConcreteComponent.perfomComponentOperation();
+        secondConcreteComponent.perfomComponentOperation();
+    }
+    
+    @Override
+    String doSomethingElse(){
+        secondConcreteComponent.perfomComponentOperation();
+        firstConcreteComponent.perfomComponentOperation();
+    }
+}
+```
+
+Let's imagine now some client code using components and mediator to `doSomething` or `doSomethingElse`. In this way the
+whole business logic regulating `Components` mutual rapport to perform such actions will remain centralized in
+the `Mediator`:
+
+```
+class Demo {
+    public static void main(String[] args) {
+        Mediator mediator = new ConcreteMediator();
+        mediator.registerComponent(new FirstConcreteComponent());
+        mediator.registerComponent(new SecondConcreteComponent());
+        mediator.doSomething();
+        mediator.doSomethingElse();
+    }
+}
+```
+
+</details>
+
 ## Memento
+
+The Memento design pattern allows object internal state capture through time without public exposition of those states
+in an uncontrolled manner across objects.
+
+<details>
+  <summary>Click to know more about the Memento</summary>
+Imagine you have a series of classes of which you want to be able to capture object's internal state in all points in time.
+To do so you may need to create a new class responsible for such a task, which can easily end up in imposing public state on all the tracked classes plus public state on the tracker itself (to allow snapshot creation and reading).
+
+Solution is to delegate snapshot state creation to state owners, called originator objects. In this way copy of the
+state is performed from inside the object without granting any access to hidden state from outside.
+
+The state snapshot of the originator is stored in an object called `Memento`, which content is accessible only to the originator.
+
+The entity able to store snapshots of state in the `Memento` is called `Caretaker`, and its interaction with `Memento` is defined through a limited interface.
+</details>
 
 ## Observer
 
