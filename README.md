@@ -1796,13 +1796,111 @@ class Demo {
 }
 ```
 
-As one amy see from the client code example the submission of a command to the controlled `Editor` object can be easily linked to `Memento` creation and state storage.
-Using then the `History` object becomes easy navigating the space of state snapshots, undoing and redoing previous commands resetting the state.
-The core of such solution stays in the internal `Memento.restore` and `Command.execute` calls done in the `History.undo` and `History.redo` methods: each time we navigate the space of snapshots the history takes care (caretaker instead) to reset state and execute commands. 
+As one amy see from the client code example the submission of a command to the controlled `Editor` object can be easily
+linked to `Memento` creation and state storage. Using then the `History` object becomes easy navigating the space of
+state snapshots, undoing and redoing previous commands resetting the state. The core of such solution stays in the
+internal `Memento.restore` and `Command.execute` calls done in the `History.undo` and `History.redo` methods: each time
+we navigate the space of snapshots the history takes care (caretaker instead) to reset state and execute commands.
 
 </details>
 
 ## Observer
+
+The Observer design pattern allows observing object to be notified when an event happens on the observed object thanks
+to a subscription mechanism.
+
+<details>
+  <summary>Click to know more about the Observer</summary>
+
+Imagine we have an object that has an interesting state for a bunch of other objects. Such object can be
+called `subject` or `publisher`. The objects that want news about the latter state are instead called `subscribers`. One
+could use different strategies to allow `subscribers` know `publisher` state: the `subscribers` could go after
+the `publisher` state regularly (wasting tons of energies and never getting the news in real time), or the `publisher`
+could notify everybody about every change in its state. Far from being optimal, such solutions solve the problem wasting
+a lot of energies. The solution the pattern proposes is to allow `subscribers` subscriptions to events' streams managed
+by the `publisher`. In this way whenever a certain event happens on the `publisher` it can go over the
+right `subscribers` and notify them with their notification method.
+
+Let's imagine we have a basic `publisher` with some interesting internal state:
+
+```
+class Publisher {
+    Map<String, List<EventListener>> listeners = new HashMap<>(); // map each list of subscribers 
+    
+    public Publisher(String... operations) { // when constructing add a stream with an empty array of subscribers
+        for (String operation : operations) {
+            this.listeners.put(operation, new ArrayList<>());
+        }
+    }
+    
+    public void subscribe(String eventType, EventListener listener) { // subscribe adding to the right list
+        List<EventListener> users = listeners.get(eventType);
+        users.add(listener);
+    }
+
+    public void unsubscribe(String eventType, EventListener listener) { // unsubscribe removing from the right list
+        List<EventListener> users = listeners.get(eventType);
+        users.remove(listener);
+    }
+    
+    public void notify(String eventType) {
+        List<EventListener> users = listeners.get(eventType);
+        for (EventListener listener : users) { // notify all the subscribed event listeners
+            listener.update(eventType);
+        }
+    }
+}
+```
+
+We can now define the interface for the `EventListener` which will provider the `update` method:
+
+```
+public interface EventListener {
+    void update(String eventType);
+}
+```
+
+Therefore the `subscribers` will implement it:
+
+```
+public class Subscriber implements EventListener {
+    private String field;
+
+    public Subscriber(String field) {
+        this.field = field;
+    }
+
+    @Override
+    public void update(String eventType) {
+        // do something when notified   
+    }
+}
+```
+
+The client code will therefore be:
+
+
+```
+public class Demo {
+    public static void main(String[] args) {
+        Publisher publisher = new Publisher();
+        publisher.subscribe("first-stream", new Subscriber("first-value"));
+        publisher.subscribe("first-stream", new Subscriber("second-value")); // subscribed first two to the first event stream
+        publisher.subscribe("second-stream", new Subscriber("third-value"));
+        publisher.subscribe("second-stream", new Subscriber("fourth-value")); // subscribed last two to the second event stream
+        
+        publisher.notify("first-stream"); // sends notification to "first-value" and "second-value" subscribers 
+        publisher.notify("second-stream"); // sends notification to "third-value" and "fourth-value" subscribers 
+    
+        publisher.unsubscribe("first-stream", new Subscriber("first-value")); // removed first subscriber from first stream subscription
+        publisher.notify("first-stream"); // sends notification only to "second-value" subscribers 
+    }
+}
+```
+
+As one may see each time the `publisher` notifies on a certain event stream all the associated `subscribers` will get the notification and act accordingly. 
+
+</details>
 
 ## State
 
