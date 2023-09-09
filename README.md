@@ -1613,9 +1613,193 @@ To do so you may need to create a new class responsible for such a task, which c
 Solution is to delegate snapshot state creation to state owners, called originator objects. In this way copy of the
 state is performed from inside the object without granting any access to hidden state from outside.
 
-The state snapshot of the originator is stored in an object called `Memento`, which content is accessible only to the originator.
+The state snapshot of the originator is stored in an object called `Memento`, which content is accessible only to the
+originator.
 
-The entity able to store snapshots of state in the `Memento` is called `Caretaker`, and its interaction with `Memento` is defined through a limited interface.
+The entity able to store snapshots of state in the `Memento` is called `Caretaker`, and its interaction with `Memento`
+is defined through a limited interface.
+
+Let's imagine we have some `Editor` class which needs to provide a snapshot history feature. A snapshot history consists
+in a list of `Command` - `Memento` pairs, each command generates a new Memento:
+
+```
+class Pair {
+        Command command;
+        Memento memento;
+        Pair(Command c, Memento m) {
+            command = c;
+            memento = m;
+        }
+    }
+```
+
+We therefore need a class which contains and manages a list of `Pair`:
+
+```
+class History {
+    private List<Pair> history = new ArrayList<Pair>();
+    private Integer virtualsize = 0; // to track where we are in the history pair list
+    
+    public void push(Command c, Memento m) {
+        if (virtualSize != history.size() && virtualSize > 0) { // if history is longer than it should be
+            history = history.subList(0, virtualSize - 1); // delete last pair
+        }
+        history.add(new Pair(c, m)); // add a new pair
+    }
+    
+    public boolean undo() {
+        Pair pair = getUndo();
+        if (pair == null) { // not trying to undo a pair at the beginnig of list
+            return false;
+        }
+        pair.getMemento().restore();
+        return true;
+    }
+    
+    private Pair getUndo() {
+        if (virtualSize == 0) { // there is no undo to be done, no pair left
+            return null;
+        }
+        virtualSize = Math.max(0, virtualSize - 1); // position of last pair of list
+        return history.get(virtualSize); // return last pair
+    }
+    
+    public boolean redo() {
+        Pair pair = getRedo();
+        if (pair == null) { // not trying to redo a pair at the end of list
+            return false;
+        }
+        pair.getMemento().restore();
+        pair.getCommand().execute();
+        return true;
+    }
+    
+    private Pair getRedo() {
+        if (virtualSize == history.size()) { // there is nothing to be redone, we're at end of list
+            return null;
+        }
+        virtualSize = Math.min(history.size(), virtualSize + 1);  // position of next pair of list
+        return history.get(virtualSize - 1); // return next pair
+    }        
+```
+
+The `History` class takes care of:
+
+- creating new `Command` - `Memento` pairs with the `push` method
+- undoing the last `Command` - `Memento` pair with the `undo` method, retrieving the last previous state
+- redoing the next `Command` - `Memento` pair with the `redo` method, retrieving the upcoming next state
+
+We then need the `Memento` class, which will contain the `Editor` object and its last-state backup:
+
+```
+class Memento {
+    private String backup;
+    private Editor editor;
+
+    public Memento(Editor editor) {
+        this.editor = editor;
+        this.backup = editor.backup(); // when the memento is originate the snapshot of the editor is created
+    }
+
+    public void restore() {
+        editor.restore(backup);
+    }
+}
+```
+
+Therefore the `Editor` class will contain its own `History` object and present the two `backup` and `restore`
+functionalities:
+
+```
+class Editor {
+    // other fields 
+    private History history; 
+    
+    public Editor() {
+        history = new History();
+        // init other fields
+    }
+    
+    String backup() {
+        // do the backup and return it in a Base64 encoded for that can only be used by the restore method
+    }
+    
+    void restore(String backup){
+        // transfer to all the other fields the value stored in the Base64 encoded backup decoding it
+    }
+}
+```
+
+The `Editor` will be controller by  `Command` classes which will need to implement the following interface:
+
+```
+interface Command{
+    String getName();
+    void execute();
+}
+```
+
+An example of a `Command` class could be the following:
+
+```
+class ConcreteCommand implements Command {
+    private Editor editor;
+    private String otherField;
+    
+    public ConcreteCommand(Editor editor, String otherField){
+        this.editor = editor;
+        this.otherField = otherField;
+    }
+    
+    @Override
+    public String getName() {
+        return otherField; // if otherField was an object return a field of it or some metadata
+    }
+
+    @Override
+    public void execute() {
+        // use otherField to do something, if otherField was an object methods could be used
+    }
+}
+```
+
+In this way we can delegate the creation of `Mementos` completely:
+
+```
+class Demo {
+    public static void main(String[] args) {
+        Editor editor = new Editor(); 
+        History history = new History(); // generate empty history
+        
+        // give the first command to the editor
+        createMementoAndExecuteCommand("first-value");
+        // give the second command to the editor
+        createMementoAndExecuteCommand("second-value");
+        
+        // now the history willl be:
+        // 1. "first-value" command memento
+        // 2. "second-value" command memento
+        
+        // undo the last pair
+        boolean secondUndone = history.undo();
+        if(secondUndone){// if undone correctly
+            // give the third command to the editor
+            createMementoAndExecuteCommand("third-value");
+        }
+    }
+    
+    private void createMementoAndExecuteCommand(String otherFieldValue){
+        Memento memento = new Memento(editor);
+        Command concreteCommand = new ConcreteCommand(editor, otherFieldValue);
+        history.push(concreteCommand, memento)
+    }
+}
+```
+
+As one amy see from the client code example the submission of a command to the controlled `Editor` object can be easily linked to `Memento` creation and state storage.
+Using then the `History` object becomes easy navigating the space of state snapshots, undoing and redoing previous commands resetting the state.
+The core of such solution stays in the internal `Memento.restore` and `Command.execute` calls done in the `History.undo` and `History.redo` methods: each time we navigate the space of snapshots the history takes care (caretaker instead) to reset state and execute commands. 
+
 </details>
 
 ## Observer
