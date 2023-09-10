@@ -1879,7 +1879,6 @@ public class Subscriber implements EventListener {
 
 The client code will therefore be:
 
-
 ```
 public class Demo {
     public static void main(String[] args) {
@@ -1898,15 +1897,262 @@ public class Demo {
 }
 ```
 
-As one may see each time the `publisher` notifies on a certain event stream all the associated `subscribers` will get the notification and act accordingly. 
+As one may see each time the `publisher` notifies on a certain event stream all the associated `subscribers` will get
+the notification and act accordingly.
 
 </details>
 
 ## State
 
+The State design pattern allows objects to alter their behaviour when the internal state changes.
+
+<details>
+  <summary>Click to know more about the State</summary>
+
+Imagine you want a specific set of objects to behave differently according to the values of their internal state. In
+such a case each method of those objects should contain some sort of state check, which will easily get longer and
+scattered the more states we consider and the more methods we add. This design patterns allows delegation of behaviour
+change of the changing-behaviour class, namely `Context`, to some `State` classes, which will contain all the necessary
+state and be managed in state change.
+
+Let's define the `State` interface, that will declare all the methods the `State` classes will need to implement to be
+properly use in `Context`:
+
+```
+interface State {
+    void firstMethod();
+    void secondMethod();
+}
+```
+
+A `FirstConcreteState` will then be something along the following example:
+
+```
+class FirstConcreteState implements State {
+    
+    @Override
+    public void firstMethod(){
+        System.out.println("FirstConcreteState.firstMethod");
+    }
+    
+    @Override
+    public void secondMethod(){
+        System.out.println("FirstConcreteState.secondMethod");
+    }
+}
+```
+
+Another `State` implementation may be:
+
+```
+class SecondConcreteState implements State {
+    
+    @Override
+    public void firstMethod(){
+        System.out.println("SecondConcreteState.firstMethod");
+    }
+    
+    @Override
+    public void secondMethod(){
+        System.out.println("SecondConcreteState.secondMethod");
+    }
+}
+```
+
+The `Context` class will then be:
+
+```
+class Context {
+    private State state;
+    
+    public Context() {
+        this.state = new FirstConcreteState();
+    } 
+
+    void setState(State state){
+        this.state = state;
+    } 
+
+    void getState(){
+        return state;
+    }
+}
+```
+
+Therefore the client code will be:
+
+```
+public class Demo {
+    public static void main(String[] args) {
+        Context context = new Context();
+        context.getState().firstMethod(); // prints FirstConcreteState.firstMethod
+        context.getState().secondMethod(); // prints FirstConcreteState.secondMethod
+    
+        context.setState(new SecondConcreteState());
+        context.getState().firstMethod(); // prints SecondConcreteState.firstMethod
+        context.getState().secondMethod(); // prints SecondConcreteState.secondMethod
+    }
+}
+```
+
+As you noticed after changing `Context` state the execution of the same two lines in which we call `firstMethod`
+and `secondMethod` produce different results. No need then to implement any state check in the `Context` class: every
+time a new behaviour has to be added to it a new `ConcreteState` class can be implemented following the `State`
+interface.
+
+`Context` state management happens then on the client code side, which provides new states and requires then the
+associated behaviours.
+
+</details>
+
 ## Strategy
 
+The Strategy design pattern allows algorithm exchange encapsulating each one of those in a class and using those
+interchangeably.
+
+<details>
+  <summary>Click to know more about the Strategy</summary>
+
+Imagine you want to implement a class, the `Context`, that can execute a task in different ways. Each time a new way has
+to be added to the code of the original class probabilities of errors and tight coupling increase. It is way better to
+define `Strategies`, which can be swapped onr with the other. In such a way the `Context` will execute it in the way
+defined by the `Strategy` that had been set.
+
+Let's define the `Strategy` interface:
+
+```
+interface Strategy {
+    void someMethod();
+}
+```
+
+Let's imagine two different `CocreteStrategies` implementing such interface:
+
+```
+class FirstCocreteStrategy implements Strategy {
+    @Override
+    public void someMethod(){
+        System.out.println("FirstCocreteStrategy.someMethod");
+    }
+}
+
+class SecondCocreteStrategy implements Strategy {
+    @Override
+    public void someMethod(){
+        System.out.println("SecondCocreteStrategy.someMethod");
+    }
+}
+```
+
+The chosen `Strategy` will be indirectly used by the `Context` class:
+
+```
+class Context {
+    private Strategy strategy;
+    
+    public Context(Strategy strategy) {
+        this.strategy = strategy;
+    }
+    
+    public void executeTask() {
+        this.strategy.someMethod();
+    }
+    
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
+    }
+}
+```
+
+Therefore the client code will only take care of setting the right `Strategy` in the `Context` and use the latter:
+
+```
+public class Demo {
+    public static void main(String[] args) {
+        Strategy firstStrategy = new FirstCocreteStrategy();
+        Strategy secondStrategy = new SecondCocreteStrategy();
+        Context context = new Context(firstStrategy);
+        context.executeTask(); // prints FirstCocreteStrategy.someMethod
+        context.setStrategy(secondStrategy);
+        context.executeTask(); // prints SecondCocreteStrategy.someMethod
+    }
+}
+```
+
+This pattern allows client code to add new behaviours to the `Context` creating new `ConcreteStrategy` classes
+implementing the desired behaviour respecting the `Strategy` interface.
+</details>
+
 ## Template Method
+
+The Template Method design pattern allows algorithm structure definition and step implementation overriding without
+structural modifications.
+
+<details>
+  <summary>Click to know more about the Template Method</summary>
+
+Imagine you need to implement an `Algorithm` to accomplish a specific task in different conditions. According to such
+conditions the internal implementation of some steps of the `Algorithm` should change. If the implementation of
+the `Algorithm` stays only in one class it is easy to end up with lots of conditions on state that will change the
+internal behaviour itself. Moreover, each time the algorithm needs to be used in another specific condition the single
+algorithm class needs to be modified and updated with new conditionals.
+
+It is better to break down the algorithm in several steps, each one implemented by a specific method:
+
+```
+abstract class Algorithm {
+    
+    public void mainMethod() {
+        firstStep();
+        secondStep();
+    }
+    
+    protected abstract void firstStep();
+    protected abstract void secondStep();
+}
+```
+
+Let's imagine now two `ConcreteAlgorithm` class extending the case `Algorithm`:
+
+```
+class FirstConcreteAlgorithm extends Algorithm {    
+    
+    protected void firstStep() {
+        System.out.println("FirstConcreteAlgorithm.firstStep");
+    }
+    
+    protected void secondStep() {
+        System.out.println("FirstConcreteAlgorithm.secondStep");    
+    }
+}
+
+class SecondConcreteAlgorithm extends Algorithm {    
+    
+    protected void firstStep() {
+        System.out.println("SecondConcreteAlgorithm.firstStep");
+    }
+    
+    protected void secondStep() {
+        System.out.println("SecondConcreteAlgorithm.secondStep");    
+    }
+}
+```
+
+Both `FirstConcreteAlgorithm` and `SecondConcreteAlgorithm` can execute the `mainMethod` with their own steps
+implementations,seamlessly to the client code:
+
+```
+public class Demo {
+    public static void main(String[] args) {
+        Algorithm algorithm = new FirstConcreteAlgorithm();
+        algorithm.mainMethod(); // prints FirstConcreteAlgorithm.firstStep - FirstConcreteAlgorithm.secondStep
+        algorithm = new SecondConcreteAlgorithm();
+        algorithm.mainMethod(); // prints SecondConcreteAlgorithm.firstStep - SecondConcreteAlgorithm.secondStep
+    }
+}
+```
+
+</details>
 
 ## Visitor
 
