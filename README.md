@@ -535,14 +535,14 @@ The Singleton design pattern is defined by two main characteristics.
 
 ```
 class Singleton {
-    private static Singletong instance;
+    private static Singleton instance;
     private int value;
     private Singleton(int value) {
         this.value = value;
     }
     public static Singleton getInstance(int value) {
         if(instance==null) {
-            return new Singleton(value);
+            instance = new Singleton(value);
         }
         return instance;
     }
