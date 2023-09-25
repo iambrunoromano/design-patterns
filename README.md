@@ -153,7 +153,7 @@ construction process to the client code.
   <summary>Click to know more about the Builder</summary>
 
 
-Identify the classes which requires numerous step-by-step initialization of fields and nested objects and the relative
+Identify the classes which require numerous step-by-step initialization of fields and nested objects and the relative
 long constructor:
 
 ```
