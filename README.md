@@ -2156,4 +2156,10 @@ public class Demo {
 
 ## Visitor
 
+The Visitor design pattern allows to separate alogirithms from objects in which they operate.
+
+<details>
+  <summary>Click to know more about the Visitor</summary>
+</details>
+  
 Credits to [Refactoring Guru's design patterns](https://refactoring.guru/design-patterns)
