@@ -2208,6 +2208,57 @@ class SecondClass implements MainInterface {
 }
 ```
 
+The visitors have now to implement the `Visitor` interface, providing adaptive behaviors for each object class:
+
+```
+class FirstVisitor implements Visitor {
+
+    @Override
+    public String visitFirstClass(FirstClass firstClass){
+        System.out.println("FirstClass visited by FirstVisitor");
+    }
+
+    @Override
+    public String visitSecondClass(SecondClass secondClass){
+        System.out.println("SecondClass visited by FirstVisitor");
+    }
+}
+
+class SecondVisitor implements Visitor {
+
+    @Override
+    public String visitFirstClass(FirstClass firstClass){
+        System.out.println("FirstClass visited by SecondVisitor");
+    }
+
+    @Override
+    public String visitSecondClass(SecondClass secondClass){
+        System.out.println("SecondClass visited by SecondVisitor");
+    }
+}
+```
+
+The client code will therefore be:
+
+```
+public class Demo {
+    public static void main(String[] args) {
+        FirstClass firstClass = new FirstClass();
+        SecondClass secondClass = new SecondClass();
+
+        FirstVisitor firstVisitor = new FirstVisitor();
+        firstClass.accept(firstVisitor); // prints "FirstClass visited by FirstVisitor"
+        secondClass.accept(firstVisitor); // prints "SecondClass visited by FirstVisitor"
+
+        SecondVisitor secondVisitor = new SecondVisitor();
+        firstClass.accept(secondVisitor); // prints "FirstClass visited by SecondVisitor"
+        secondClass.accept(secondVisitor); // prints "SecondClass visited by SecondVisitor"
+    }
+}
+```
+
+As you can see the added behavior introduced with first and second visitor are not hardocded into the class hierarchy, grouped under the same visitor and easily switchable. All comes with little cost in terms of the class hierarchy codebase modification, adding only the `accept` method that simply redirects the new behavior request to the used visitor.
+
 </details>
   
 Credits to [Refactoring Guru's design patterns](https://refactoring.guru/design-patterns)
