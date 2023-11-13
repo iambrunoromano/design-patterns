@@ -2160,6 +2160,54 @@ The Visitor design pattern allows to separate alogirithms from objects in which 
 
 <details>
   <summary>Click to know more about the Visitor</summary>
+  Imagine you need to introduce some behavior into a class hierarchy on all classes. The required behavior unfortunately needs to adapt to the specific class type itself. Introducing methods in all classes can be a long and possibily dangerous process in which the existing codebase can acquire bugs. Instead, injecting such specific behavior is the best way to go, decoupling it from the objects in which it will be executed, and allowing similar-behavior groups to be provided to the class hierarchy all at the same time.
+
+Let's define our `Visitor` interface, having declared all the methods that can use all the objects of the class hierarchy as input:
+
+```
+interface Visitor {
+    String visitFirstClass(FirstClass firstClass);
+    String visitSecondClass(SecondClass secondClass);
+}
+```
+
+Each of such methods will be used in the class hierarchy. Let's define then our class hierarchy, that relies on the following interface:
+
+```
+interface MainInterface {
+    void someMethod();
+    String accept(Visitor visitor);
+}
+```
+
+Let's imagine two different classes implementing such interface:
+
+```
+class FirstClass implements MainInterface {
+    @Override
+    public void someMethod(){
+        System.out.println("FirstClass.someMethod");
+    }
+
+    @Override
+    public String accept(Visitor visitor) {
+        return visitor.visitFirstClass(this);
+    }
+}
+
+class SecondClass implements MainInterface {
+    @Override
+    public void someMethod(){
+        System.out.println("SecondClass.someMethod");
+    }
+
+    @Override
+    public String accept(Visitor visitor) {
+        return visitor.visitSecondClass(this);
+    }
+}
+```
+
 </details>
   
 Credits to [Refactoring Guru's design patterns](https://refactoring.guru/design-patterns)
