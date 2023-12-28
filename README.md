@@ -675,7 +675,7 @@ As you can see, each time we want to add use use the same feature `reallyDoIt(St
 class.
 
 This happens because we do not separate the `abstraction` (the interface with the external world of the chosen class, in
-our cases the methods: `doSomething(String input)` and `doSomething(Integer input)doSomething(Integer input)`) from
+our cases the methods: `doSomething(String input)` and `doSomething(Integer input)`) from
 the `implementation` (the actually exposed chosen class functionality, the method  `reallyDoIt(String input)`).
 
 To separate abstraction from implementation one has to declare two separate interfaces:
@@ -706,7 +706,7 @@ class FirstImplementation implements Implementation {
     @Override
     void secondFeature() {
         System.out.println("secondFeature implementation of FirstImplementation class")
-    }; 
+    }
 }
 
 class SecondImplementation implements Implementation {
@@ -718,7 +718,7 @@ class SecondImplementation implements Implementation {
     @Override
     void secondFeature() {
         System.out.println("secondFeature implementation of SecondImplementation class")
-    }; 
+    }
 }
 ```
 
